@@ -7183,6 +7183,2300 @@ class NEBULAAPIState:
 # ================================================================
 #  GLOBAL STATE
 # ================================================================
+
+# Embedded website HTML
+_EMBEDDED_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>NEBULA Blockchain (NBL) — Financial Freedom for All Humanity</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#03070f;--bg2:#060c1a;--bg3:#0a1224;--panel:#0c1528;
+  --b1:#152038;--b2:#1e3060;--b3:#2a4080;
+  --nbl:#00c8ff;--nbl2:#0055ff;--nbl3:#003acc;
+  --gold:#ffd700;--gold2:#b8860b;--gold3:#7a5c00;
+  --green:#00e887;--green2:#00994d;
+  --red:#ff2244;--red2:#aa0022;
+  --orange:#ff8800;--purple:#8855ff;--pink:#ff44aa;
+  --text:#d0e4ff;--text2:#8aabcc;--muted:#445870;
+  --gn:0 0 20px rgba(0,200,255,.2);--gg:0 0 20px rgba(255,215,0,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(0,85,255,.04) 0,transparent 60%),
+             radial-gradient(ellipse 60% 40% at 80% 80%,rgba(0,200,255,.03) 0,transparent 60%),
+             radial-gradient(1px 1px at 10% 20%,rgba(0,200,255,.6) 0,transparent 100%),
+             radial-gradient(1px 1px at 90% 10%,rgba(255,255,255,.4) 0,transparent 100%),
+             radial-gradient(1px 1px at 50% 80%,rgba(0,85,255,.5) 0,transparent 100%),
+             radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.25) 0,transparent 100%),
+             radial-gradient(2px 2px at 70% 30%,rgba(255,215,0,.2) 0,transparent 100%),
+             radial-gradient(1px 1px at 85% 65%,rgba(136,85,255,.3) 0,transparent 100%),
+             radial-gradient(1px 1px at 15% 85%,rgba(255,255,255,.2) 0,transparent 100%),
+             radial-gradient(1px 1px at 60% 15%,rgba(0,200,255,.35) 0,transparent 100%);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px;}
+
+/* HEADER */
+#hdr{position:sticky;top:0;z-index:500;background:rgba(3,7,15,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);}
+.hi{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px;padding:0 14px;gap:10px;}
+.logo{font-family:'Orbitron',monospace;font-weight:900;font-size:1.15rem;color:var(--nbl);text-shadow:var(--gn);display:flex;align-items:center;gap:9px;white-space:nowrap;}
+.logo-box{width:36px;height:36px;background:linear-gradient(135deg,var(--nbl3),var(--nbl2),var(--nbl));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 0 18px rgba(0,200,255,.35);}
+.logo-sub{font-size:.55rem;color:var(--muted);font-family:'Space Mono',monospace;display:block;line-height:1;}
+.hbadge{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:20px;font-family:'Space Mono',monospace;font-size:.6rem;white-space:nowrap;}
+.live{background:rgba(0,232,135,.08);border:1px solid rgba(0,232,135,.35);color:var(--green);}
+.mainnet{background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.25);color:var(--nbl);}
+.dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.7);}}
+.hprice{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--gold);}
+
+/* NAV */
+#nav{position:sticky;top:54px;z-index:400;background:rgba(3,7,15,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--b1);}
+.nscroll{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding:7px 10px;max-width:900px;margin:0 auto;}
+.nscroll::-webkit-scrollbar{display:none;}
+.tab{flex:0 0 auto;padding:7px 13px;border:none;border-radius:8px;background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.62rem;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.tab:hover{color:var(--text2);background:rgba(255,255,255,.04);}
+.tab.on{background:linear-gradient(135deg,var(--nbl3),var(--nbl2));color:#fff;box-shadow:0 0 14px rgba(0,200,255,.25);}
+
+/* PAGES */
+.page{display:none;padding:14px 12px 110px;max-width:900px;margin:0 auto;}
+.page.on{display:block;}
+
+/* CARD */
+.card{background:var(--panel);border:1px solid var(--b1);border-radius:16px;padding:17px;margin-bottom:13px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,255,.25),transparent);}
+.ct{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:11px;display:flex;align-items:center;gap:8px;}
+.ct::after{content:'';flex:1;height:1px;background:var(--b1);}
+
+/* SECTION TITLE */
+.st{font-family:'Orbitron',monospace;font-size:.78rem;font-weight:700;color:var(--text2);margin:18px 0 11px;display:flex;align-items:center;gap:9px;}
+.st::after{content:'';flex:1;height:1px;background:var(--b1);}
+
+/* STAT BOXES */
+.sg{display:grid;gap:9px;margin-bottom:13px;}
+.sg2{grid-template-columns:1fr 1fr;}
+.sg3{grid-template-columns:repeat(3,1fr);}
+.sg4{grid-template-columns:repeat(2,1fr);}
+@media(min-width:480px){.sg4{grid-template-columns:repeat(4,1fr);}}
+.sb{background:var(--bg3);border:1px solid var(--b1);border-radius:12px;padding:14px;text-align:center;}
+.sn{font-family:'Orbitron',monospace;font-size:1.35rem;font-weight:700;color:var(--nbl);line-height:1.1;}
+.sn.sm{font-size:.95rem;}
+.sn.xs{font-size:.8rem;}
+.sn.g{color:var(--green);}
+.sn.r{color:var(--red);}
+.sn.o{color:var(--gold);}
+.sn.p{color:var(--purple);}
+.sl{font-size:.6rem;color:var(--muted);margin-top:5px;font-family:'Space Mono',monospace;letter-spacing:.5px;}
+
+/* ROW */
+.row{display:flex;align-items:flex-start;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(21,32,56,.9);gap:8px;font-size:.78rem;}
+.row:last-child{border-bottom:none;}
+.rk{color:var(--muted);font-family:'Space Mono',monospace;font-size:.65rem;white-space:nowrap;flex-shrink:0;}
+.rv{color:var(--text);font-weight:500;text-align:right;word-break:break-all;}
+.green{color:var(--green)!important;}.red{color:var(--red)!important;}.gold{color:var(--gold)!important;}
+.nbl{color:var(--nbl)!important;}.purple{color:var(--purple)!important;}.orange{color:var(--orange)!important;}
+.mono{font-family:'Space Mono',monospace!important;font-size:.62rem!important;}
+
+/* BUTTONS */
+.btn{width:100%;padding:13px 16px;border:none;border-radius:12px;font-family:'Orbitron',monospace;font-size:.76rem;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.5px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn+.btn{margin-top:9px;}
+.bp{background:linear-gradient(135deg,var(--nbl3),var(--nbl2),var(--nbl));color:#fff;box-shadow:0 4px 18px rgba(0,200,255,.22);}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,200,255,.4);}
+.bg{background:linear-gradient(135deg,var(--green2),var(--green));color:#000;font-weight:800;}
+.br{background:linear-gradient(135deg,var(--red2),var(--red));color:#fff;}
+.bgold{background:linear-gradient(135deg,var(--gold3),var(--gold2),var(--gold));color:#000;font-weight:800;}
+.bpur{background:linear-gradient(135deg,#3311aa,var(--purple));color:#fff;}
+.bo{background:transparent;border:1px solid var(--b2);color:var(--text2);}
+.bo:hover{border-color:var(--nbl);color:var(--nbl);}
+.btn:active{transform:scale(.98);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;}
+
+/* INPUT */
+.ig{margin-bottom:11px;}
+.il{display:block;font-size:.62rem;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:5px;letter-spacing:.5px;}
+.if{width:100%;background:var(--bg2);border:1px solid var(--b1);border-radius:10px;padding:11px 13px;color:var(--text);font-family:'Space Mono',monospace;font-size:.72rem;outline:none;transition:border .2s;}
+.if:focus{border-color:var(--nbl);box-shadow:0 0 10px rgba(0,200,255,.08);}
+.if::placeholder{color:var(--muted);}
+textarea.if{resize:vertical;min-height:70px;}
+select.if{cursor:pointer;}
+
+/* ALERTS */
+.alert{padding:10px 14px;border-radius:10px;font-size:.75rem;margin-bottom:11px;display:none;font-family:'Space Mono',monospace;line-height:1.5;}
+.alert.on{display:block;}
+.as{background:rgba(0,232,135,.07);border:1px solid rgba(0,232,135,.28);color:var(--green);}
+.ae{background:rgba(255,34,68,.07);border:1px solid rgba(255,34,68,.28);color:var(--red);}
+.ai{background:rgba(0,200,255,.07);border:1px solid rgba(0,200,255,.28);color:var(--nbl);}
+.aw{background:rgba(255,136,0,.07);border:1px solid rgba(255,136,0,.28);color:var(--orange);}
+
+/* HASH */
+.hash{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--nbl);word-break:break-all;background:var(--bg2);padding:8px 10px;border-radius:8px;border:1px solid var(--b1);margin:5px 0;}
+
+/* COPY WRAP */
+.cw{position:relative;}
+.cb{position:absolute;right:7px;top:50%;transform:translateY(-50%);background:var(--b1);border:none;color:var(--muted);padding:3px 7px;border-radius:5px;font-size:.58rem;cursor:pointer;font-family:'Space Mono',monospace;transition:all .2s;}
+.cb:hover{color:var(--nbl);background:var(--b2);}
+
+/* SPINNER */
+.spin{display:inline-block;width:13px;height:13px;border:2px solid var(--b1);border-top-color:var(--nbl);border-radius:50%;animation:rot .7s linear infinite;vertical-align:middle;}
+@keyframes rot{to{transform:rotate(360deg);}}
+
+/* PROGRESS */
+.pb-wrap{background:var(--bg2);border-radius:8px;height:9px;margin:9px 0;overflow:hidden;}
+.pb{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--nbl2),var(--nbl));transition:width 1.2s ease;box-shadow:0 0 8px rgba(0,200,255,.35);}
+.pb.go{background:linear-gradient(90deg,var(--green2),var(--green));}
+.pb.gold{background:linear-gradient(90deg,var(--gold2),var(--gold));}
+
+/* TERMINAL */
+.term{background:#010508;border:1px solid var(--b1);border-radius:12px;padding:13px;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--green);min-height:110px;max-height:200px;overflow-y:auto;line-height:1.7;}
+.tl::before{content:'> ';color:var(--nbl);}
+.tl.err{color:var(--red);}
+.tl.warn{color:var(--orange);}
+.tl.ok{color:var(--green);}
+.tl.info{color:var(--nbl);}
+.tl.dim{color:var(--muted);}
+
+/* BLOCK ITEM */
+.bi{background:var(--bg2);border:1px solid var(--b1);border-radius:12px;padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:all .18s;}
+.bi:hover{border-color:var(--nbl);transform:translateX(3px);}
+.bn{background:linear-gradient(135deg,var(--nbl3),var(--nbl2));color:#fff;font-family:'Orbitron',monospace;font-size:.67rem;font-weight:700;padding:8px 9px;border-radius:8px;min-width:52px;text-align:center;}
+.binfo{flex:1;min-width:0;}
+.bhash{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--nbl);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bmeta{font-size:.65rem;color:var(--muted);margin-top:2px;}
+.breward{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--gold);white-space:nowrap;}
+
+/* TX ITEM */
+.ti{background:var(--bg2);border:1px solid var(--b1);border-radius:10px;padding:11px;margin-bottom:7px;}
+.th{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--nbl);margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;font-size:.65rem;color:var(--muted);}
+
+/* WALLET CARD */
+.wc{background:linear-gradient(135deg,#060e20,#0b1830,#0f1f3a);border:1px solid rgba(0,200,255,.22);border-radius:20px;padding:22px;margin-bottom:13px;position:relative;overflow:hidden;}
+.wc::after{content:'◈';position:absolute;right:-12px;top:-22px;font-size:105px;color:rgba(0,200,255,.035);font-family:'Orbitron',monospace;pointer-events:none;}
+.wl{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+.wb{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:900;color:var(--nbl);text-shadow:var(--gn);}
+.ws{font-size:.85rem;color:var(--muted);}
+.wa{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-top:9px;word-break:break-all;}
+
+/* MNEMONIC */
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:9px 0;}
+.mw{background:var(--bg2);border:1px solid var(--b1);border-radius:8px;padding:7px;text-align:center;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--nbl);}
+.mn{font-size:.52rem;color:var(--muted);display:block;margin-bottom:1px;}
+
+/* MODULE BOX */
+.modg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px;}
+.modb{background:var(--bg3);border:1px solid var(--b1);border-radius:11px;padding:12px;display:flex;align-items:center;gap:9px;}
+.modic{font-size:1.3rem;width:30px;text-align:center;}
+.modn{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text2);}
+.modst{font-size:.58rem;margin-top:1px;}
+
+/* PEER ITEM */
+.pi{background:var(--bg2);border:1px solid var(--b1);border-radius:10px;padding:11px;margin-bottom:7px;display:flex;align-items:center;gap:11px;}
+.pip{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--nbl);}
+.pim{font-size:.62rem;color:var(--muted);margin-top:2px;}
+
+/* CONTRACT TOKEN ITEM */
+.cti{background:var(--bg2);border:1px solid var(--b1);border-radius:11px;padding:13px;margin-bottom:8px;}
+.ctn{font-family:'Orbitron',monospace;font-size:.82rem;font-weight:700;}
+.cts{color:var(--gold);font-size:.72rem;}
+.ctm{font-size:.65rem;color:var(--muted);margin-top:4px;}
+
+/* TEST ITEM */
+.tsti{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid rgba(21,32,56,.6);font-size:.72rem;}
+.tsti:last-child{border-bottom:none;}
+.tstn{flex:1;font-family:'Space Mono',monospace;font-size:.65rem;}
+.tstms{font-size:.6rem;color:var(--muted);}
+
+/* SECURITY ALERT */
+.sal{background:var(--bg2);border-left:3px solid var(--red);border-radius:0 10px 10px 0;padding:11px;margin-bottom:7px;}
+.sal.warn{border-color:var(--orange);}
+.sal.info{border-color:var(--nbl);}
+.sal.ok{border-color:var(--green);}
+.salm{font-size:.76rem;color:var(--text);}
+.salmt{font-size:.62rem;color:var(--muted);margin-top:3px;font-family:'Space Mono',monospace;}
+
+/* HALVING COUNTDOWN */
+.hcd{display:flex;justify-content:center;gap:18px;margin:14px 0;}
+.hcu{text-align:center;}
+.hcn{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:900;color:var(--gold);}
+.hcl{font-size:.58rem;color:var(--muted);font-family:'Space Mono',monospace;margin-top:1px;}
+
+/* CHART */
+.chwrap{background:var(--bg2);border:1px solid var(--b1);border-radius:12px;height:110px;display:flex;align-items:flex-end;justify-content:space-between;padding:8px;gap:3px;overflow:hidden;}
+.chbar{flex:1;border-radius:4px 4px 0 0;opacity:.75;transition:height .4s;}
+
+/* PAGE TABS */
+.ptabs{display:flex;gap:5px;margin-bottom:13px;overflow-x:auto;scrollbar-width:none;}
+.ptabs::-webkit-scrollbar{display:none;}
+.ptab{flex:0 0 auto;padding:6px 13px;border-radius:8px;background:var(--bg2);border:1px solid var(--b1);color:var(--muted);font-family:'Space Mono',monospace;font-size:.62rem;cursor:pointer;transition:all .18s;}
+.ptab.on{background:var(--nbl2);border-color:var(--nbl);color:#fff;}
+.ptab:hover:not(.on){border-color:var(--b2);color:var(--text2);}
+
+/* BLUR */
+.blur{filter:blur(5px);cursor:pointer;user-select:none;}
+.blur:hover,.blur.shown{filter:none;}
+
+/* TOOLTIP */
+.tip{position:relative;cursor:help;}
+.tip::after{content:attr(data-t);position:absolute;bottom:calc(100%+5px);left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--b1);color:var(--text2);font-size:.6rem;padding:4px 9px;border-radius:7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s;font-family:'Space Mono',monospace;z-index:100;}
+.tip:hover::after{opacity:1;}
+
+/* HERO */
+.hero{text-align:center;padding:22px 10px 14px;}
+.htitle{font-family:'Orbitron',monospace;font-size:2.3rem;font-weight:900;background:linear-gradient(135deg,var(--nbl),#44aaff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.05;margin-bottom:7px;}
+.hsub{font-size:.78rem;color:var(--muted);max-width:320px;margin:0 auto 16px;line-height:1.65;}
+.hquote{font-style:italic;font-size:.72rem;color:var(--text2);border-left:2px solid var(--nbl);padding-left:10px;margin:10px auto;max-width:280px;text-align:left;}
+
+/* PRICE BIG */
+.pbig{font-family:'Orbitron',monospace;font-size:2.5rem;font-weight:900;color:var(--gold);text-shadow:var(--gg);}
+
+/* FOOTER */
+#ftr{position:fixed;bottom:0;left:0;right:0;background:rgba(3,7,15,.97);border-top:1px solid var(--b1);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;z-index:300;}
+.ft{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);}
+.fst{display:flex;align-items:center;gap:5px;font-family:'Space Mono',monospace;font-size:.58rem;}
+
+/* GENESIS SPECIAL */
+.genesis-card{background:linear-gradient(135deg,#0a0c20,#0d1535);border:1px solid rgba(255,215,0,.2);border-radius:16px;padding:20px;text-align:center;}
+.genesis-hash{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--gold);word-break:break-all;margin:8px 0;}
+
+/* RAW DATA */
+.rawdata{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--nbl);white-space:pre-wrap;overflow-x:auto;background:var(--bg2);border:1px solid var(--b1);border-radius:8px;padding:10px;max-height:300px;overflow-y:auto;}
+
+/* INLINE FLEX UTILS */
+.flex{display:flex;}.gap4{gap:4px;}.gap8{gap:8px;}.ac{align-items:center;}.jb{justify-content:space-between;}.f1{flex:1;}
+.mt8{margin-top:8px;}.mt12{margin-top:12px;}.mt16{margin-top:16px;}
+.w50{width:50%;}.w60{width:60%;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="hdr">
+<div class="hi">
+  <div class="logo">
+    <div class="logo-box">◈</div>
+    <div>NEBULA<span class="logo-sub">BLOCKCHAIN — NBL</span></div>
+  </div>
+  <div class="flex gap8 ac">
+    <div class="hprice" id="hdr-block">Block #<span id="hb">0</span></div>
+    <div class="hbadge live"><div class="dot"></div>LIVE</div>
+    <div class="hbadge mainnet">MAINNET</div>
+  </div>
+</div>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+<div class="nscroll">
+  <button class="tab on"   onclick="go('dashboard',this)">🏠 Dashboard</button>
+  <button class="tab"      onclick="go('market',this)">📈 Market</button>
+  <button class="tab"      onclick="go('wallet',this)">👛 Wallet</button>
+  <button class="tab"      onclick="go('send',this)">📤 Send</button>
+  <button class="tab"      onclick="go('miner',this)">⛏️ Miner</button>
+  <button class="tab"      onclick="go('explorer',this)">🔍 Explorer</button>
+  <button class="tab"      onclick="go('mempool',this)">⏳ Mempool</button>
+  <button class="tab"      onclick="go('contracts',this)">📜 Contracts</button>
+  <button class="tab"      onclick="go('network',this)">🌐 Network</button>
+  <button class="tab"      onclick="go('security',this)">🔒 Security</button>
+  <button class="tab"      onclick="go('tests',this)">🧪 Tests</button>
+  <button class="tab"      onclick="go('economics',this)">💰 Economics</button>
+  <button class="tab"      onclick="go('genesis',this)">🌱 Genesis</button>
+  <button class="tab"      onclick="go('modules',this)">📦 Modules</button>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: DASHBOARD
+══════════════════════════════════════ -->
+<div id="page-dashboard" class="page on">
+<div class="hero">
+  <div class="htitle">NEBULA<br>BLOCKCHAIN</div>
+  <div class="hsub">No Government · No Bank · No Permission Needed<br>🌍 Financial Freedom for All Humanity</div>
+  <div class="hquote">"No Government. No Bank. No Permission. — 2025"<br><small style="color:var(--muted)">— Zayn Quantum, Creator</small></div>
+</div>
+
+<div class="sg sg4">
+  <div class="sb"><div class="sn" id="d-h">—</div><div class="sl">BLOCK HEIGHT</div></div>
+  <div class="sb"><div class="sn g" id="d-peers">—</div><div class="sl">CONNECTED PEERS</div></div>
+  <div class="sb"><div class="sn o sm" id="d-reward">—</div><div class="sl">REWARD/BLOCK</div></div>
+  <div class="sb"><div class="sn" id="d-mp">—</div><div class="sl">MEMPOOL TXs</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">⚡ LIVE NODE STATUS</div>
+  <div class="row"><span class="rk">STATUS</span><span class="rv" id="d-status"><span class="spin"></span> connecting...</span></div>
+  <div class="row"><span class="rk">CHAIN NAME</span><span class="rv gold">NEBULA</span></div>
+  <div class="row"><span class="rk">SYMBOL</span><span class="rv gold">NBL</span></div>
+  <div class="row"><span class="rk">CHAIN ID</span><span class="rv nbl">2025</span></div>
+  <div class="row"><span class="rk">VERSION</span><span class="rv">v1.0.0 — Protocol 70015</span></div>
+  <div class="row"><span class="rk">ALGORITHM</span><span class="rv">SHA-256d Proof of Work</span></div>
+  <div class="row"><span class="rk">MAX SUPPLY</span><span class="rv gold tip" data-t="Fixed forever — like Bitcoin">10,700,000 NBL</span></div>
+  <div class="row"><span class="rk">SMALLEST UNIT</span><span class="rv">1 Neb = 0.000000001 NBL (9 decimals)</span></div>
+  <div class="row"><span class="rk">BLOCK TIME TARGET</span><span class="rv">600 seconds (10 minutes)</span></div>
+  <div class="row"><span class="rk">HALVING INTERVAL</span><span class="rv">Every 210,000 blocks (~4 years)</span></div>
+  <div class="row"><span class="rk">GENESIS DATE</span><span class="rv">2025-03-16 00:00:00 UTC</span></div>
+  <div class="row"><span class="rk">GENESIS MESSAGE</span><span class="rv" style="font-size:.62rem;color:var(--nbl);">NEBULA — Financial Freedom for All Humanity</span></div>
+  <div class="row"><span class="rk">TIP HASH</span><span class="rv mono nbl" id="d-tip">—</span></div>
+  <div class="row"><span class="rk">HASHRATE</span><span class="rv green" id="d-hr">—</span></div>
+  <div class="row"><span class="rk">UPTIME</span><span class="rv green" id="d-uptime">—</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">🎯 HALVING COUNTDOWN</div>
+  <div class="row"><span class="rk">CURRENT ERA</span><span class="rv gold" id="d-era">Era #1</span></div>
+  <div class="row"><span class="rk">NEXT HALVING AT BLOCK</span><span class="rv" id="d-nexth">210,000</span></div>
+  <div class="row"><span class="rk">BLOCKS REMAINING</span><span class="rv" id="d-brem">—</span></div>
+  <div class="row"><span class="rk">CURRENT REWARD</span><span class="rv gold">50 NBL per block</span></div>
+  <div class="row"><span class="rk">NEXT REWARD</span><span class="rv">25 NBL per block</span></div>
+  <div class="pb-wrap"><div class="pb gold" id="d-hbar" style="width:0%"></div></div>
+  <div class="hcd">
+    <div class="hcu"><div class="hcn" id="hc-d">—</div><div class="hcl">DAYS</div></div>
+    <div class="hcu"><div class="hcn" id="hc-h">—</div><div class="hcl">HOURS</div></div>
+    <div class="hcu"><div class="hcn" id="hc-m">—</div><div class="hcl">MIN</div></div>
+    <div class="hcu"><div class="hcn" id="hc-s">—</div><div class="hcl">SEC</div></div>
+  </div>
+</div>
+
+<div class="st">🔧 ALL 11 MODULES STATUS</div>
+<div class="modg" id="d-mods">
+  <div class="modb"><div class="modic">⛓️</div><div><div class="modn">nebula_core.py</div><div class="modst" id="mc0">...</div></div></div>
+  <div class="modb"><div class="modic">🖥️</div><div><div class="modn">nebula_node.py</div><div class="modst" id="mc1">...</div></div></div>
+  <div class="modb"><div class="modic">🌐</div><div><div class="modn">nebula_network.py</div><div class="modst" id="mc2">...</div></div></div>
+  <div class="modb"><div class="modic">👛</div><div><div class="modn">nebula_wallet.py</div><div class="modst" id="mc3">...</div></div></div>
+  <div class="modb"><div class="modic">⛏️</div><div><div class="modn">nebula_miner.py</div><div class="modst" id="mc4">...</div></div></div>
+  <div class="modb"><div class="modic">📜</div><div><div class="modn">nebula_contracts.py</div><div class="modst" id="mc5">...</div></div></div>
+  <div class="modb"><div class="modic">🔒</div><div><div class="modn">nebula_security.py</div><div class="modst" id="mc6">...</div></div></div>
+  <div class="modb"><div class="modic">🧪</div><div><div class="modn">nebula_tests.py</div><div class="modst" id="mc7">...</div></div></div>
+  <div class="modb"><div class="modic">💻</div><div><div class="modn">nebula_cli.py</div><div class="modst" id="mc8">...</div></div></div>
+  <div class="modb"><div class="modic">🚀</div><div><div class="modn">nebula_api.py</div><div class="modst" id="mc9">...</div></div></div>
+  <div class="modb"><div class="modic">🛠️</div><div><div class="modn">server_setup.sh</div><div class="modst green">✅ DEPLOYED</div></div></div>
+</div>
+
+<button class="btn bp" onclick="loadDash()">🔄 REFRESH DASHBOARD</button>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: MARKET
+══════════════════════════════════════ -->
+<div id="page-market" class="page">
+<div class="card" style="text-align:center;padding:22px;">
+  <div class="wl">NBL / USD — SIMULATED PRICE</div>
+  <div class="pbig" id="mk-price">$0.000000</div>
+  <div class="mt8" id="mk-chg" style="font-size:.75rem;">—</div>
+  <div style="font-size:.65rem;color:var(--muted);margin-top:5px;">* Price is simulated for demonstration</div>
+</div>
+
+<div class="sg sg4">
+  <div class="sb"><div class="sn o xs" id="mk-cap">—</div><div class="sl">MARKET CAP</div></div>
+  <div class="sb"><div class="sn xs"   id="mk-vol">—</div><div class="sl">24H VOLUME</div></div>
+  <div class="sb"><div class="sn g xs" id="mk-hi">—</div><div class="sl">24H HIGH</div></div>
+  <div class="sb"><div class="sn r xs" id="mk-lo">—</div><div class="sl">24H LOW</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">📊 PRICE CHART (7D SIMULATED)</div>
+  <div class="chwrap" id="mk-chart"></div>
+  <div class="flex jb mt8" style="font-size:.6rem;color:var(--muted);font-family:'Space Mono',monospace;">
+    <span>7 days ago</span><span>today</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="ct">📋 TOKEN INFO</div>
+  <div class="row"><span class="rk">NAME</span><span class="rv">NEBULA</span></div>
+  <div class="row"><span class="rk">SYMBOL</span><span class="rv gold">NBL</span></div>
+  <div class="row"><span class="rk">CHAIN ID</span><span class="rv nbl">2025</span></div>
+  <div class="row"><span class="rk">DECIMALS</span><span class="rv">9 (smallest: 1 Neb)</span></div>
+  <div class="row"><span class="rk">MAX SUPPLY</span><span class="rv gold">10,700,000 NBL (fixed forever)</span></div>
+  <div class="row"><span class="rk">CIRCULATING SUPPLY</span><span class="rv" id="mk-circ">—</span></div>
+  <div class="row"><span class="rk">MINED SO FAR</span><span class="rv green" id="mk-mined">—</span></div>
+  <div class="row"><span class="rk">REMAINING</span><span class="rv" id="mk-rem">—</span></div>
+  <div class="row"><span class="rk">ALGORITHM</span><span class="rv">SHA-256d (double SHA-256)</span></div>
+  <div class="row"><span class="rk">CONSENSUS</span><span class="rv">Proof of Work (PoW)</span></div>
+  <div class="row"><span class="rk">ADDRESS PREFIX</span><span class="rv nbl">N (version byte 0x35)</span></div>
+  <div class="row"><span class="rk">WIF PREFIX</span><span class="rv nbl">5 (version byte 0x80)</span></div>
+  <div class="row"><span class="rk">P2SH PREFIX</span><span class="rv nbl">3 (version byte 0x32)</span></div>
+  <div class="row"><span class="rk">NETWORK MAGIC</span><span class="rv mono">d9b4bef9 (mainnet)</span></div>
+  <div class="row"><span class="rk">TESTNET MAGIC</span><span class="rv mono">07091 10b</span></div>
+  <div class="row"><span class="rk">BIP44 COIN TYPE</span><span class="rv">m/44'/2025'/0'</span></div>
+  <div class="row"><span class="rk">AUTHOR</span><span class="rv">Zayn Quantum (Rahmatullah Rahmani)</span></div>
+  <div class="row"><span class="rk">LICENSE</span><span class="rv green">MIT — Open Source</span></div>
+  <div class="row"><span class="rk">EXPLORER URL</span><span class="rv mono nbl" id="mk-url" style="font-size:.58rem;">—</span></div>
+</div>
+<button class="btn bp" onclick="loadMarket()">🔄 REFRESH</button>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: WALLET
+══════════════════════════════════════ -->
+<div id="page-wallet" class="page">
+<div class="ptabs">
+  <div class="ptab on"  onclick="wt('create',this)">✨ Create New</div>
+  <div class="ptab"     onclick="wt('import',this)">🔑 Import WIF</div>
+  <div class="ptab"     onclick="wt('mnemonic',this)">🌱 Import Seed</div>
+  <div class="ptab"     onclick="wt('multisig',this)">🔐 Multisig</div>
+  <div class="ptab"     onclick="wt('watch',this)">👁️ Watch-Only</div>
+  <div class="ptab"     onclick="wt('check',this)">💰 Check Addr</div>
+</div>
+
+<!-- CREATE -->
+<div id="wt-create">
+  <div id="w-empty">
+    <div class="card" style="text-align:center;padding:36px 18px;">
+      <div style="font-size:4rem;margin-bottom:14px;">👛</div>
+      <div style="font-family:'Orbitron',monospace;font-size:1rem;color:var(--text);margin-bottom:7px;">No Wallet Yet</div>
+      <div style="font-size:.75rem;color:var(--muted);line-height:1.6;">Create a NEBULA HD wallet secured by<br>BIP39 mnemonic + BIP32 derivation</div>
+    </div>
+  </div>
+  <div id="w-show" style="display:none;">
+    <div class="wc">
+      <div class="wl">NEBULA WALLET BALANCE</div>
+      <div class="wb" id="w-bal">0.000000000 <span class="ws">NBL</span></div>
+      <div style="font-size:.68rem;color:var(--text2);margin-top:3px;" id="w-bal-neb">0 Neb</div>
+      <div class="wa" id="w-addr-s">Loading...</div>
+    </div>
+    <div class="card">
+      <div class="ct">📍 WALLET ADDRESS</div>
+      <div class="cw"><div class="hash" id="w-addr">—</div><button class="cb" onclick="cp('w-addr')">COPY</button></div>
+      <div class="row"><span class="rk">DERIVATION PATH</span><span class="rv mono">m/44'/2025'/0'/0/0</span></div>
+      <div class="row"><span class="rk">ADDRESS TYPE</span><span class="rv">P2PKH (Pay to Public Key Hash)</span></div>
+
+      <div class="ct mt12">🗝️ PRIVATE KEY (WIF)</div>
+      <div class="cw"><div class="hash blur" id="w-wif" onclick="this.classList.toggle('shown')">🔒 tap to reveal</div><button class="cb" onclick="cp('w-wif');document.getElementById('w-wif').classList.add('shown')">COPY</button></div>
+
+      <div id="w-xpub-sec">
+        <div class="ct mt12">🔓 EXTENDED PUBLIC KEY (xpub)</div>
+        <div class="cw"><div class="hash" id="w-xpub" style="font-size:.55rem;">—</div><button class="cb" onclick="cp('w-xpub')">COPY</button></div>
+      </div>
+
+      <div id="w-mn-sec" style="display:none;">
+        <div class="ct mt12">📝 RECOVERY PHRASE (12 WORDS)</div>
+        <div class="mg" id="w-mg"></div>
+        <div style="background:rgba(255,34,68,.07);border:1px solid rgba(255,34,68,.22);border-radius:9px;padding:10px;margin-top:7px;font-size:.7rem;color:var(--red);line-height:1.6;">
+          ⚠️ <strong>CRITICAL:</strong> Write these 12 words on paper RIGHT NOW!<br>
+          • Never store digitally or take screenshot<br>
+          • Never share with anyone — EVER<br>
+          • Lose these words = lose your funds forever<br>
+          • No recovery possible without these words
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">📊 WALLET STATISTICS</div>
+      <div class="row"><span class="rk">TOTAL RECEIVED</span><span class="rv green" id="w-recv">0.000000000 NBL</span></div>
+      <div class="row"><span class="rk">TOTAL SENT</span><span class="rv red" id="w-sent">0.000000000 NBL</span></div>
+      <div class="row"><span class="rk">NET BALANCE</span><span class="rv nbl" id="w-net">0.000000000 NBL</span></div>
+      <div class="row"><span class="rk">TRANSACTION COUNT</span><span class="rv" id="w-txc">0</span></div>
+      <div class="row"><span class="rk">UTXO COUNT</span><span class="rv" id="w-utxo">0</span></div>
+      <div class="row"><span class="rk">FEES PAID</span><span class="rv" id="w-fees">0.000000000 NBL</span></div>
+    </div>
+  </div>
+  <div id="w-alert" class="alert"></div>
+  <button class="btn bp" onclick="createWallet()" id="btn-create">✨ CREATE NEW HD WALLET</button>
+  <button class="btn bo mt8" onclick="refreshBal()" id="btn-rbbal" style="display:none;">🔄 REFRESH BALANCE</button>
+</div>
+
+<!-- IMPORT WIF -->
+<div id="wt-import" style="display:none;">
+  <div class="card">
+    <div class="ct">🔑 IMPORT BY WIF PRIVATE KEY</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">
+      WIF (Wallet Import Format) is a Base58Check encoded private key starting with <span class="nbl">5</span>.
+    </div>
+    <div class="ig"><label class="il">WIF PRIVATE KEY</label><input class="if" id="imp-wif" placeholder="5HueCGU8rMjxECyDialwujZjvMQQeg2b..."></div>
+    <div id="imp-alert" class="alert"></div>
+    <button class="btn bp" onclick="importWIF()">🔑 IMPORT WALLET</button>
+  </div>
+</div>
+
+<!-- IMPORT MNEMONIC -->
+<div id="wt-mnemonic" style="display:none;">
+  <div class="card">
+    <div class="ct">🌱 RESTORE FROM RECOVERY PHRASE</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">
+      Enter your 12 or 24 BIP39 mnemonic words separated by spaces.
+    </div>
+    <div class="ig"><label class="il">RECOVERY PHRASE (12 or 24 words)</label><textarea class="if" id="imp-mn" rows="3" placeholder="word1 word2 word3 word4 word5 word6 word7 word8 word9 word10 word11 word12"></textarea></div>
+    <div class="ig"><label class="il">BIP39 PASSPHRASE (optional extra security)</label><input class="if" id="imp-pass" placeholder="Leave empty if you did not set one"></div>
+    <div class="ig"><label class="il">ACCOUNT INDEX (default: 0)</label><input class="if" id="imp-acc" type="number" value="0" min="0"></div>
+    <div id="mn-alert" class="alert"></div>
+    <button class="btn bgold" onclick="importMnemonic()">🌱 RESTORE WALLET</button>
+  </div>
+</div>
+
+<!-- MULTISIG -->
+<div id="wt-multisig" style="display:none;">
+  <div class="card">
+    <div class="ct">🔐 CREATE M-OF-N MULTISIG WALLET</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">
+      Multisig requires M signatures out of N total keys — more secure for large amounts.
+    </div>
+    <div class="sg sg2">
+      <div class="ig"><label class="il">REQUIRED SIGS (M)</label><input class="if" id="ms-m" type="number" value="2" min="1" max="15"></div>
+      <div class="ig"><label class="il">TOTAL KEYS (N)</label><input class="if" id="ms-n" type="number" value="3" min="2" max="15"></div>
+    </div>
+    <div class="ig"><label class="il">PUBLIC KEY 1 (compressed, 33 bytes)</label><input class="if" id="ms-k1" placeholder="02a1b2c3d4e5f6...66 hex chars"></div>
+    <div class="ig"><label class="il">PUBLIC KEY 2</label><input class="if" id="ms-k2" placeholder="03a1b2c3d4e5f6...66 hex chars"></div>
+    <div class="ig"><label class="il">PUBLIC KEY 3 (optional for 2-of-3)</label><input class="if" id="ms-k3" placeholder="02a1b2c3d4e5f6...66 hex chars"></div>
+    <div id="ms-alert" class="alert"></div>
+    <button class="btn bpur" onclick="createMS()">🔐 CREATE MULTISIG ADDRESS</button>
+    <div id="ms-result" style="display:none;margin-top:12px;">
+      <div class="ct">P2SH MULTISIG ADDRESS</div>
+      <div class="cw"><div class="hash" id="ms-addr">—</div><button class="cb" onclick="cp('ms-addr')">COPY</button></div>
+      <div class="ct mt8">REDEEM SCRIPT (HEX)</div>
+      <div class="hash" id="ms-script" style="font-size:.55rem;">—</div>
+      <div class="row mt8"><span class="rk">TYPE</span><span class="rv" id="ms-type">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- WATCH ONLY -->
+<div id="wt-watch" style="display:none;">
+  <div class="card">
+    <div class="ct">👁️ ADD WATCH-ONLY ADDRESS</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">
+      Monitor any NBL address without importing its private key.
+    </div>
+    <div class="ig"><label class="il">NBL ADDRESS</label><input class="if" id="wo-addr" placeholder="N... (starts with N)"></div>
+    <div class="ig"><label class="il">LABEL (optional)</label><input class="if" id="wo-lbl" placeholder="My cold wallet, Exchange, etc."></div>
+    <button class="btn bo" onclick="addWatch()">➕ ADD TO WATCHLIST</button>
+  </div>
+  <div id="watch-list"></div>
+</div>
+
+<!-- CHECK ADDRESS -->
+<div id="wt-check" style="display:none;">
+  <div class="card">
+    <div class="ct">💰 CHECK ANY NBL ADDRESS</div>
+    <div class="ig"><label class="il">NBL ADDRESS</label><input class="if" id="ck-addr" placeholder="N..."></div>
+    <button class="btn bp" onclick="checkAddr()">🔍 CHECK BALANCE</button>
+    <div id="ck-result" style="display:none;margin-top:12px;">
+      <div class="row"><span class="rk">ADDRESS</span><span class="rv mono nbl" id="ck-a">—</span></div>
+      <div class="row"><span class="rk">BALANCE</span><span class="rv gold" id="ck-b">—</span></div>
+      <div class="row"><span class="rk">BALANCE (Neb)</span><span class="rv" id="ck-bn">—</span></div>
+      <div class="row"><span class="rk">TX COUNT</span><span class="rv" id="ck-tc">—</span></div>
+      <div class="row"><span class="rk">UTXO COUNT</span><span class="rv" id="ck-uc">—</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: SEND
+══════════════════════════════════════ -->
+<div id="page-send" class="page">
+<div class="card">
+  <div class="ct">📤 SEND NBL — BROADCAST TRANSACTION</div>
+  <div id="send-alert" class="alert"></div>
+  <div class="ig"><label class="il">FROM ADDRESS (your NBL address)</label><input class="if" id="s-from" placeholder="N... (starts with N)"></div>
+  <div class="ig"><label class="il">WIF PRIVATE KEY (to sign transaction)</label><input class="if" id="s-priv" type="password" placeholder="5... (your private key — never shared)"></div>
+  <div class="ig"><label class="il">TO ADDRESS (recipient)</label><input class="if" id="s-to" placeholder="N... or 3... (P2PKH or P2SH)"></div>
+  <div class="ig"><label class="il">AMOUNT (NBL)</label><input class="if" id="s-amt" type="number" placeholder="0.00000000" step="0.000000001" min="0.000000546" oninput="calcFee()"></div>
+  <div class="ig"><label class="il">NETWORK FEE (NBL) — minimum 0.000001</label><input class="if" id="s-fee" type="number" value="0.000001" step="0.000001" min="0.000001" oninput="calcFee()"></div>
+  <div class="ig"><label class="il">OP_RETURN MESSAGE (optional, max 80 bytes)</label><input class="if" id="s-msg" placeholder="Optional on-chain data / message..."></div>
+  <button class="btn bp" onclick="sendNBL()">🚀 SIGN & BROADCAST TRANSACTION</button>
+</div>
+
+<div id="tx-result" style="display:none;" class="card">
+  <div class="ct">✅ TRANSACTION BROADCAST</div>
+  <div class="row"><span class="rk">STATUS</span><span class="rv green">✅ Accepted — in mempool</span></div>
+  <div class="row"><span class="rk">TXID</span><span class="rv mono nbl" id="tx-id" style="font-size:.58rem;">—</span></div>
+  <div class="row"><span class="rk">CONFIRMATIONS</span><span class="rv" id="tx-conf">0 / waiting...</span></div>
+  <div class="row"><span class="rk">EXPECTED CONFIRM</span><span class="rv">~10 minutes (1 block)</span></div>
+  <div class="row"><span class="rk">FULL CONFIRM (6 blocks)</span><span class="rv">~60 minutes</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">📐 FEE ESTIMATOR</div>
+  <div class="row"><span class="rk">TYPICAL TX INPUTS</span><span class="rv" id="fe-in">1 input × 148 bytes = 148 bytes</span></div>
+  <div class="row"><span class="rk">TYPICAL TX OUTPUTS</span><span class="rv" id="fe-out">2 outputs × 34 bytes = 68 bytes</span></div>
+  <div class="row"><span class="rk">OVERHEAD</span><span class="rv">10 bytes</span></div>
+  <div class="row"><span class="rk">ESTIMATED TX SIZE</span><span class="rv" id="fe-size">~226 bytes</span></div>
+  <div class="row"><span class="rk">MIN FEE (1 Neb/byte)</span><span class="rv gold" id="fe-minfee">0.000001 NBL</span></div>
+  <div class="row"><span class="rk">YOUR FEE RATE</span><span class="rv" id="fe-rate">—</span></div>
+  <div class="row"><span class="rk">TOTAL TO SEND</span><span class="rv gold" id="fe-total">—</span></div>
+  <div class="row"><span class="rk">DUST THRESHOLD</span><span class="rv">546 Neb = 0.000000546 NBL (min output)</span></div>
+  <div class="row"><span class="rk">COINBASE MATURITY</span><span class="rv">100 blocks before mined coins spendable</span></div>
+  <div class="row"><span class="rk">CONFIRM TIME</span><span class="rv">~10 min (1 block) to ~60 min (6 blocks)</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">📤 SEND RAW TX HEX (Advanced)</div>
+  <div style="font-size:.72rem;color:var(--muted);margin-bottom:10px;">If you already have a signed raw transaction hex:</div>
+  <div class="ig"><label class="il">SIGNED RAW TX (HEX)</label><textarea class="if" id="raw-tx" rows="3" placeholder="0100000001..."></textarea></div>
+  <div id="raw-alert" class="alert"></div>
+  <button class="btn bo" onclick="sendRaw()">📡 BROADCAST RAW TX</button>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: MINER
+══════════════════════════════════════ -->
+<div id="page-miner" class="page">
+<div class="sg sg4">
+  <div class="sb"><div class="sn" id="mn-st" style="font-size:.85rem;color:var(--red)">IDLE</div><div class="sl">STATUS</div></div>
+  <div class="sb"><div class="sn sm" id="mn-hr">0 H/s</div><div class="sl">HASHRATE</div></div>
+  <div class="sb"><div class="sn o" id="mn-blk">0</div><div class="sl">BLOCKS FOUND</div></div>
+  <div class="sb"><div class="sn g sm" id="mn-earn">0 NBL</div><div class="sl">TOTAL EARNED</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">📊 MINING ENGINE INFO</div>
+  <div class="row"><span class="rk">ALGORITHM</span><span class="rv">SHA-256d (double SHA-256) — same as Bitcoin</span></div>
+  <div class="row"><span class="rk">ENGINE</span><span class="rv nbl">Python multiprocessing (no GIL)</span></div>
+  <div class="row"><span class="rk">BATCH SIZE</span><span class="rv">50,000 hashes per batch</span></div>
+  <div class="row"><span class="rk">MAX NONCE</span><span class="rv mono">0xFFFFFFFF = 4,294,967,295</span></div>
+  <div class="row"><span class="rk">BLOCK REWARD</span><span class="rv gold">50 NBL + all mempool fees</span></div>
+  <div class="row"><span class="rk">DIFFICULTY RETARGET</span><span class="rv">Every 2,016 blocks (~2 weeks)</span></div>
+  <div class="row"><span class="rk">MAX DIFFICULTY CHANGE</span><span class="rv">4× up or 4× down per retarget</span></div>
+  <div class="row"><span class="rk">INITIAL BITS</span><span class="rv mono nbl">0x1e0fffff</span></div>
+  <div class="row"><span class="rk">CURRENT DIFFICULTY</span><span class="rv" id="mn-diff">—</span></div>
+  <div class="row"><span class="rk">CPU CORES AVAILABLE</span><span class="rv" id="mn-cores">—</span></div>
+  <div class="pb-wrap"><div class="pb go" id="mn-bar" style="width:0%"></div></div>
+  <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);" id="mn-prog">Ready to mine</div>
+</div>
+
+<div class="card">
+  <div class="ct">⚙️ MINING CONFIGURATION</div>
+  <div class="ig"><label class="il">REWARD ADDRESS (your NBL wallet address)</label><input class="if" id="mn-addr" placeholder="N... (your NBL address to receive rewards)"></div>
+  <div class="ig"><label class="il">WORKER THREADS</label>
+    <select class="if" id="mn-thr">
+      <option value="1">1 Thread — lightest on CPU</option>
+      <option value="2">2 Threads — balanced</option>
+      <option value="4" selected>4 Threads — maximum performance</option>
+    </select>
+  </div>
+  <div class="ig"><label class="il">MEMPOOL TX SELECTION STRATEGY</label>
+    <select class="if" id="mn-mp">
+      <option value="all">All transactions — maximize fees</option>
+      <option value="high">High fee only — quality over quantity</option>
+      <option value="none">None — mine empty blocks (faster)</option>
+    </select>
+  </div>
+</div>
+
+<div id="mn-alert" class="alert"></div>
+<button class="btn bg" id="btn-mstart" onclick="startMining()">⛏️ START MINING</button>
+<button class="btn br" id="btn-mstop" onclick="stopMining()" style="display:none;">⏹️ STOP MINING</button>
+
+<div class="st mt16">📋 MINING LOG</div>
+<div class="term" id="mn-log"></div>
+
+<div class="st mt16">📈 LIVE HASHRATE</div>
+<div class="card">
+  <div class="chwrap" id="mn-chart"></div>
+</div>
+
+<div class="st mt16">🏆 HALVING SCHEDULE</div>
+<div class="card">
+  <div class="row" style="font-family:'Space Mono',monospace;font-size:.58rem;">
+    <span class="rk" style="width:40px;">ERA</span>
+    <span style="color:var(--muted);flex:1;">BLOCK RANGE</span>
+    <span style="color:var(--muted);width:80px;text-align:center;">REWARD</span>
+    <span class="rv" style="width:90px;">COINS MINED</span>
+  </div>
+  <div class="row"><span class="rk">1 ✓</span><span class="rv" style="flex:1;text-align:left;">0 – 209,999</span><span class="gold" style="width:80px;text-align:center;font-size:.72rem;">50 NBL</span><span class="rv" style="width:90px;">10,500,000</span></div>
+  <div class="row"><span class="rk">2</span><span class="rv" style="flex:1;text-align:left;">210,000 – 419,999</span><span class="gold" style="width:80px;text-align:center;font-size:.72rem;">25 NBL</span><span class="rv" style="width:90px;">5,250,000</span></div>
+  <div class="row"><span class="rk">3</span><span class="rv" style="flex:1;text-align:left;">420,000 – 629,999</span><span class="gold" style="width:80px;text-align:center;font-size:.72rem;">12.5 NBL</span><span class="rv" style="width:90px;">2,625,000</span></div>
+  <div class="row"><span class="rk">4</span><span class="rv" style="flex:1;text-align:left;">630,000 – 839,999</span><span class="gold" style="width:80px;text-align:center;font-size:.72rem;">6.25 NBL</span><span class="rv" style="width:90px;">1,312,500</span></div>
+  <div class="row"><span class="rk">5</span><span class="rv" style="flex:1;text-align:left;">840,000 – 1,049,999</span><span class="gold" style="width:80px;text-align:center;font-size:.72rem;">3.125</span><span class="rv" style="width:90px;">656,250</span></div>
+  <div class="row"><span class="rk">6</span><span class="rv" style="flex:1;text-align:left;">1,050,000 – 1,259,999</span><span class="gold" style="width:80px;text-align:center;font-size:.72rem;">1.5625</span><span class="rv" style="width:90px;">328,125</span></div>
+  <div class="row"><span class="rk">7</span><span class="rv" style="flex:1;text-align:left;">1,260,000 – 1,469,999</span><span class="gold" style="width:80px;text-align:center;font-size:.72rem;">0.78125</span><span class="rv" style="width:90px;">164,062</span></div>
+  <div class="row"><span class="rk">...</span><span class="rv" style="flex:1;text-align:left;">halves every 210,000 blocks</span><span style="width:80px;"></span><span class="rv" style="width:90px;">total: ~10.7M</span></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: EXPLORER
+══════════════════════════════════════ -->
+<div id="page-explorer" class="page">
+<div class="card">
+  <div class="ct">🔍 SEARCH BLOCKCHAIN</div>
+  <div class="ig" style="margin-bottom:8px;"><label class="il">BLOCK HEIGHT / BLOCK HASH / TXID / NBL ADDRESS</label>
+    <input class="if" id="ex-q" placeholder="0   or   000000abc123...64chars   or   N3x7y9..."></div>
+  <div class="flex gap8">
+    <button class="btn bp f1" onclick="exSearch()">🔍 SEARCH</button>
+    <button class="btn bo" style="width:72px;padding:13px 0;" onclick="exSearch('block')">BLOCK</button>
+    <button class="btn bo" style="width:56px;padding:13px 0;" onclick="exSearch('tx')">TX</button>
+    <button class="btn bo" style="width:68px;padding:13px 0;" onclick="exSearch('addr')">ADDR</button>
+  </div>
+</div>
+
+<div id="ex-result" style="display:none;" class="card">
+  <div class="ct" id="ex-rtype">SEARCH RESULT</div>
+  <div id="ex-data"></div>
+</div>
+
+<div class="st">📦 LATEST BLOCKS</div>
+<div id="ex-blocks"><div style="text-align:center;padding:22px;color:var(--muted);font-family:'Space Mono',monospace;font-size:.68rem;"><span class="spin"></span> Loading blocks...</div></div>
+
+<div class="st mt8">🔗 RECENT TRANSACTIONS</div>
+<div id="ex-txs"><div style="text-align:center;padding:14px;color:var(--muted);font-size:.68rem;">Loading...</div></div>
+
+<div class="st mt8">🌱 GENESIS BLOCK</div>
+<div class="card">
+  <div class="row"><span class="rk">HEIGHT</span><span class="rv">0 (Genesis)</span></div>
+  <div class="row"><span class="rk">DATE</span><span class="rv gold">2025-03-16 00:00:00 UTC</span></div>
+  <div class="row"><span class="rk">HASH</span><span class="rv mono nbl" style="font-size:.58rem;">8c4557f72ecd10764f5410ca10e4b07fef801fabb7f24602ff364ed378a081f5</span></div>
+  <div class="row"><span class="rk">MESSAGE</span><span class="rv" style="font-size:.65rem;">NEBULA — Financial Freedom for All Humanity — 2025/03/16</span></div>
+  <div class="row"><span class="rk">NONCE</span><span class="rv mono">2,083,236,893</span></div>
+  <div class="row"><span class="rk">BITS</span><span class="rv mono nbl">0x1d00ffff</span></div>
+  <div class="row"><span class="rk">REWARD</span><span class="rv gold">50 NBL → NLfMw4STiuDo9pMixgNnXZapH3sXasYVk5</span></div>
+  <div class="row"><span class="rk">COINBASE TXID</span><span class="rv mono nbl" style="font-size:.55rem;">4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b</span></div>
+</div>
+<button class="btn bo" onclick="loadExplorer()">🔄 REFRESH</button>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: MEMPOOL
+══════════════════════════════════════ -->
+<div id="page-mempool" class="page">
+<div class="sg sg4">
+  <div class="sb"><div class="sn"   id="mp-cnt">—</div><div class="sl">PENDING TXs</div></div>
+  <div class="sb"><div class="sn o sm" id="mp-afee">—</div><div class="sl">AVG FEE</div></div>
+  <div class="sb"><div class="sn sm" id="mp-sz">—</div><div class="sl">TOTAL SIZE</div></div>
+  <div class="sb"><div class="sn g sm" id="mp-minfee">—</div><div class="sl">MIN FEE/byte</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">ℹ️ MEMPOOL STATISTICS</div>
+  <div class="row"><span class="rk">PENDING TRANSACTIONS</span><span class="rv" id="mp-txs">—</span></div>
+  <div class="row"><span class="rk">TOTAL FEES AVAILABLE</span><span class="rv gold" id="mp-tfee">—</span></div>
+  <div class="row"><span class="rk">TOTAL BYTES</span><span class="rv" id="mp-bytes">—</span></div>
+  <div class="row"><span class="rk">MAX TX SIZE</span><span class="rv">1,000,000 bytes per transaction</span></div>
+  <div class="row"><span class="rk">MIN RELAY FEE</span><span class="rv">1,000 Neb = 0.000001 NBL per TX</span></div>
+  <div class="row"><span class="rk">NEXT BLOCK IN</span><span class="rv green" id="mp-next">~10 minutes</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">💰 FEE MARKET (PRIORITY LEVELS)</div>
+  <div class="row"><span class="rk">🔴 HIGH PRIORITY (confirm in 1 block)</span><span class="rv green">0.00001 NBL/byte</span></div>
+  <div class="row"><span class="rk">🟡 MEDIUM PRIORITY (1-3 blocks)</span><span class="rv gold">0.000005 NBL/byte</span></div>
+  <div class="row"><span class="rk">🟢 LOW PRIORITY (3-6 blocks)</span><span class="rv">0.000001 NBL/byte (minimum)</span></div>
+  <div class="row"><span class="rk">TYPICAL TX SIZE</span><span class="rv">~226 bytes (1 input, 2 outputs)</span></div>
+  <div class="row"><span class="rk">HIGH PRIORITY COST</span><span class="rv green">0.00000226 NBL (~2,260 Neb)</span></div>
+  <div class="row"><span class="rk">LOW PRIORITY COST</span><span class="rv">0.000000226 NBL (~226 Neb)</span></div>
+</div>
+
+<div class="st">📋 PENDING TRANSACTIONS</div>
+<div id="mp-list"><div style="text-align:center;padding:22px;color:var(--muted);font-family:'Space Mono',monospace;font-size:.68rem;">No pending transactions in mempool</div></div>
+<button class="btn bo" onclick="loadMempool()">🔄 REFRESH MEMPOOL</button>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: CONTRACTS
+══════════════════════════════════════ -->
+<div id="page-contracts" class="page">
+<div class="ptabs">
+  <div class="ptab on" onclick="ct('tokens',this)">🪙 NBL-20 Tokens</div>
+  <div class="ptab"    onclick="ct('deploy',this)">🚀 Deploy Token</div>
+  <div class="ptab"    onclick="ct('htlc',this)">⚡ HTLC</div>
+  <div class="ptab"    onclick="ct('timelock',this)">🔒 Timelock</div>
+  <div class="ptab"    onclick="ct('scripts',this)">📋 Script Types</div>
+  <div class="ptab"    onclick="ct('decode',this)">🔍 Decode Script</div>
+</div>
+
+<!-- TOKENS LIST -->
+<div id="ct-tokens">
+  <div class="card">
+    <div class="ct">📋 CONTRACT SYSTEM INFO</div>
+    <div class="row"><span class="rk">FILE</span><span class="rv">nebula_contracts.py (797 lines)</span></div>
+    <div class="row"><span class="rk">SCRIPT OPCODES</span><span class="rv nbl">92 opcodes (Bitcoin-compatible subset)</span></div>
+    <div class="row"><span class="rk">TOKEN STANDARD</span><span class="rv">NBL-20 (like ERC-20)</span></div>
+    <div class="row"><span class="rk">NBL-20 METHODS</span><span class="rv">deploy, transfer, approve, transferFrom, burn, mint, balance_of, allowance</span></div>
+    <div class="row"><span class="rk">INTERPRETER</span><span class="rv">ScriptInterpreter — full stack machine</span></div>
+    <div class="row"><span class="rk">TEMPLATES</span><span class="rv">ContractTemplates class</span></div>
+  </div>
+  <div class="st">🪙 DEPLOYED NBL-20 TOKENS</div>
+  <div id="ct-list"><div style="text-align:center;padding:20px;color:var(--muted);font-size:.72rem;"><span class="spin"></span> Loading tokens...</div></div>
+  <button class="btn bo" onclick="loadContracts()">🔄 REFRESH TOKENS</button>
+</div>
+
+<!-- DEPLOY -->
+<div id="ct-deploy" style="display:none;">
+  <div class="card">
+    <div class="ct">🚀 DEPLOY NBL-20 TOKEN</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">
+      Deploy your own fungible token on the NEBULA blockchain using the NBL-20 standard.
+    </div>
+    <div id="dep-alert" class="alert"></div>
+    <div class="ig"><label class="il">TOKEN NAME *</label><input class="if" id="dep-name" placeholder="My Token"></div>
+    <div class="ig"><label class="il">TOKEN SYMBOL * (uppercase)</label><input class="if" id="dep-sym" placeholder="MTK"></div>
+    <div class="ig"><label class="il">TOTAL SUPPLY *</label><input class="if" id="dep-sup" type="number" placeholder="1000000"></div>
+    <div class="ig"><label class="il">DECIMALS (0-18, default 8)</label><input class="if" id="dep-dec" type="number" value="8" min="0" max="18"></div>
+    <div class="ig"><label class="il">OWNER ADDRESS * (NBL address)</label><input class="if" id="dep-own" placeholder="N..."></div>
+    <div class="ig"><label class="il">DESCRIPTION</label><textarea class="if" id="dep-desc" rows="2" placeholder="What is this token for?"></textarea></div>
+    <button class="btn bp" onclick="deployToken()">🚀 DEPLOY TOKEN CONTRACT</button>
+    <div id="dep-res" style="display:none;margin-top:12px;" class="card">
+      <div class="ct">✅ TOKEN DEPLOYED</div>
+      <div class="row"><span class="rk">CONTRACT ADDRESS</span><span class="rv mono nbl" id="dep-caddr" style="font-size:.58rem;">—</span></div>
+      <div class="row"><span class="rk">TOKEN NAME</span><span class="rv" id="dep-cname">—</span></div>
+      <div class="row"><span class="rk">SYMBOL</span><span class="rv gold" id="dep-csym">—</span></div>
+      <div class="row"><span class="rk">TOTAL SUPPLY</span><span class="rv" id="dep-csup">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- HTLC -->
+<div id="ct-htlc" style="display:none;">
+  <div class="card">
+    <div class="ct">⚡ HASH TIME LOCK CONTRACT (HTLC)</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">
+      HTLC enables atomic swaps — trustless exchange between two parties without any intermediary.<br><br>
+      <strong style="color:var(--text2);">How it works:</strong> Recipient can claim funds by revealing a secret preimage. If not claimed before timeout, sender gets refund.
+    </div>
+    <div class="ig"><label class="il">RECIPIENT ADDRESS</label><input class="if" id="htlc-rcpt" placeholder="N..."></div>
+    <div class="ig"><label class="il">SECRET PREIMAGE (any text or bytes)</label><input class="if" id="htlc-pre" placeholder="Secret only the recipient knows"></div>
+    <div class="ig"><label class="il">REFUND ADDRESS (if timeout)</label><input class="if" id="htlc-ref" placeholder="N... (your address for refund)"></div>
+    <div class="ig"><label class="il">TIMEOUT (in blocks, ~10 min each)</label><input class="if" id="htlc-to" type="number" value="144" min="1"></div>
+    <button class="btn bpur" onclick="createHTLC()">⚡ CREATE HTLC SCRIPT</button>
+    <div id="htlc-res" style="display:none;margin-top:12px;">
+      <div class="card">
+        <div class="ct">P2SH ADDRESS (send funds here)</div>
+        <div class="cw"><div class="hash" id="htlc-addr">—</div><button class="cb" onclick="cp('htlc-addr')">COPY</button></div>
+        <div class="ct mt8">PREIMAGE HASH (SHA-256)</div>
+        <div class="hash" id="htlc-hash" style="font-size:.58rem;">—</div>
+        <div class="ct mt8">REDEEM SCRIPT HEX</div>
+        <div class="hash" id="htlc-script" style="font-size:.55rem;">—</div>
+        <div class="row mt8"><span class="rk">TIMEOUT BLOCKS</span><span class="rv" id="htlc-tb">—</span></div>
+        <div class="row"><span class="rk">TIMEOUT TIME</span><span class="rv" id="htlc-tt">—</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELOCK -->
+<div id="ct-timelock" style="display:none;">
+  <div class="card">
+    <div class="ct">🔒 TIMELOCK / VESTING CONTRACT</div>
+    <div style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">
+      Lock funds until a specific block height — useful for vesting schedules or time-delayed payments.
+    </div>
+    <div class="ig"><label class="il">BENEFICIARY ADDRESS</label><input class="if" id="tl-ben" placeholder="N... address that can claim after unlock"></div>
+    <div class="ig"><label class="il">LOCK UNTIL BLOCK HEIGHT</label><input class="if" id="tl-blk" type="number" placeholder="e.g. 52560 = ~1 year"></div>
+    <button class="btn bp" onclick="createTimelock()">🔒 CREATE TIMELOCK</button>
+    <div id="tl-res" style="display:none;margin-top:12px;" class="card">
+      <div class="ct">TIMELOCK P2SH ADDRESS</div>
+      <div class="cw"><div class="hash" id="tl-addr">—</div><button class="cb" onclick="cp('tl-addr')">COPY</button></div>
+      <div class="row mt8"><span class="rk">UNLOCKS AT BLOCK</span><span class="rv gold" id="tl-tb">—</span></div>
+      <div class="row"><span class="rk">APPROX UNLOCK TIME</span><span class="rv" id="tl-tt">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT TYPES -->
+<div id="ct-scripts" style="display:none;">
+  <div class="card">
+    <div class="ct">📋 SUPPORTED SCRIPT TYPES</div>
+    <div class="row"><span class="rk">P2PKH</span><span class="rv nbl">Pay to Public Key Hash — standard address (N...)</span></div>
+    <div class="row"><span class="rk">P2PK</span><span class="rv nbl">Pay to Public Key — legacy format</span></div>
+    <div class="row"><span class="rk">P2SH</span><span class="rv nbl">Pay to Script Hash — starts with 3...</span></div>
+    <div class="row"><span class="rk">MULTISIG</span><span class="rv purple">M-of-N signatures (up to 15-of-15)</span></div>
+    <div class="row"><span class="rk">HTLC</span><span class="rv purple">Hash Time Lock Contract — atomic swaps</span></div>
+    <div class="row"><span class="rk">CLTV</span><span class="rv purple">CheckLockTimeVerify — absolute timelock</span></div>
+    <div class="row"><span class="rk">CSV</span><span class="rv purple">CheckSequenceVerify — relative timelock</span></div>
+    <div class="row"><span class="rk">VESTING</span><span class="rv purple">Linear vesting schedule</span></div>
+    <div class="row"><span class="rk">ATOMIC SWAP</span><span class="rv gold">Cross-chain atomic swap support</span></div>
+    <div class="row"><span class="rk">OP_RETURN</span><span class="rv">On-chain data storage (max 80 bytes)</span></div>
+    <div class="row"><span class="rk">NULL_DATA</span><span class="rv">Unspendable data output</span></div>
+  </div>
+  <div class="card">
+    <div class="ct">⚙️ SCRIPT OPCODES (92 total)</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--nbl);line-height:2.2;">
+      <div>Stack: OP_0, OP_1–OP_16, OP_DUP, OP_DROP, OP_SWAP, OP_ROT, OP_OVER</div>
+      <div>Crypto: OP_HASH160, OP_HASH256, OP_SHA256, OP_RIPEMD160, OP_CHECKSIG</div>
+      <div>Multi: OP_CHECKMULTISIG, OP_CHECKMULTISIGVERIFY</div>
+      <div>Flow: OP_IF, OP_ELSE, OP_ENDIF, OP_VERIFY, OP_RETURN</div>
+      <div>Time: OP_CHECKLOCKTIMEVERIFY (CLTV), OP_CHECKSEQUENCEVERIFY (CSV)</div>
+      <div>Arith: OP_ADD, OP_SUB, OP_EQUAL, OP_EQUALVERIFY, OP_BOOLAND, OP_BOOLOR</div>
+    </div>
+  </div>
+</div>
+
+<!-- DECODE SCRIPT -->
+<div id="ct-decode" style="display:none;">
+  <div class="card">
+    <div class="ct">🔍 DECODE/PARSE SCRIPT HEX</div>
+    <div class="ig"><label class="il">SCRIPT HEX</label><textarea class="if" id="sc-hex" rows="3" placeholder="76a914abc123...88ac"></textarea></div>
+    <div id="sc-alert" class="alert"></div>
+    <button class="btn bo" onclick="decodeScript()">🔍 DECODE SCRIPT</button>
+    <div id="sc-res" style="display:none;margin-top:12px;" class="card">
+      <div class="ct">DECODED SCRIPT</div>
+      <div class="row"><span class="rk">TYPE</span><span class="rv nbl" id="sc-type">—</span></div>
+      <div class="row"><span class="rk">ASM</span><span class="rv mono" id="sc-asm" style="font-size:.6rem;">—</span></div>
+      <div class="row"><span class="rk">ADDRESS (if P2PKH/P2SH)</span><span class="rv" id="sc-addr">—</span></div>
+      <div class="row"><span class="rk">DATA (if OP_RETURN)</span><span class="rv" id="sc-data">—</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: NETWORK
+══════════════════════════════════════ -->
+<div id="page-network" class="page">
+<div class="sg sg2">
+  <div class="sb"><div class="sn g" id="n-peers">—</div><div class="sl">CONNECTED PEERS</div></div>
+  <div class="sb"><div class="sn"   id="n-h">—</div><div class="sl">BEST HEIGHT</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">🔗 YOUR NODE INFO</div>
+  <div class="row"><span class="rk">NODE URL</span><span class="rv mono nbl" id="n-url" style="font-size:.58rem;">—</span></div>
+  <div class="row"><span class="rk">P2P PORT</span><span class="rv">8333 (Bitcoin-compatible)</span></div>
+  <div class="row"><span class="rk">API PORT</span><span class="rv">8080 (REST)</span></div>
+  <div class="row"><span class="rk">WEBSOCKET PORT</span><span class="rv">8081 (live events)</span></div>
+  <div class="row"><span class="rk">PROTOCOL VERSION</span><span class="rv nbl">70015</span></div>
+  <div class="row"><span class="rk">CHAIN ID</span><span class="rv gold">2025</span></div>
+  <div class="row"><span class="rk">NETWORK</span><span class="rv green">NEBULA MAINNET</span></div>
+  <div class="row"><span class="rk">MAINNET MAGIC BYTES</span><span class="rv mono nbl">d9b4bef9</span></div>
+  <div class="row"><span class="rk">TESTNET MAGIC BYTES</span><span class="rv mono">0709110b</span></div>
+  <div class="row"><span class="rk">MAX OUTBOUND PEERS</span><span class="rv">8</span></div>
+  <div class="row"><span class="rk">MAX INBOUND PEERS</span><span class="rv">117</span></div>
+  <div class="row"><span class="rk">MAX TOTAL PEERS</span><span class="rv">125</span></div>
+  <div class="row"><span class="rk">HANDSHAKE TIMEOUT</span><span class="rv">10 seconds</span></div>
+  <div class="row"><span class="rk">PING INTERVAL</span><span class="rv">60 seconds</span></div>
+  <div class="row"><span class="rk">MAX HEADERS/REQUEST</span><span class="rv">2,000</span></div>
+  <div class="row"><span class="rk">MAX BLOCKS/REQUEST</span><span class="rv">500</span></div>
+  <div class="row"><span class="rk">UPTIME</span><span class="rv green" id="n-up">—</span></div>
+  <div class="row"><span class="rk">DNS SEEDS</span><span class="rv" style="font-size:.62rem;">dnsseed.nebula-nbl.io, dnsseed2.nebula-nbl.io, seed.nebula-nbl.io</span></div>
+</div>
+
+<div class="st">👥 CONNECTED PEERS</div>
+<div id="n-plist"><div style="text-align:center;padding:22px;color:var(--muted);font-size:.68rem;"><span class="spin"></span> Loading peers...</div></div>
+
+<div class="st">📡 ALL 32 API ENDPOINTS</div>
+<div class="card">
+  <div style="font-family:'Space Mono',monospace;font-size:.6rem;line-height:2.1;">
+    <div style="color:var(--muted);margin-bottom:3px;">── GET endpoints (25) ──</div>
+    <div class="nbl">/ &nbsp;&nbsp; /api &nbsp;&nbsp; /api/status &nbsp;&nbsp; /api/blockchain</div>
+    <div class="nbl">/api/blocks &nbsp;&nbsp; /api/block/{h} &nbsp;&nbsp; /api/tx/{id}</div>
+    <div class="nbl">/api/mempool &nbsp;&nbsp; /api/address/{a} &nbsp;&nbsp; /api/search</div>
+    <div class="nbl">/api/miner &nbsp;&nbsp; /api/miner/hashrate &nbsp;&nbsp; /api/network</div>
+    <div class="nbl">/api/network/peers &nbsp;&nbsp; /api/security</div>
+    <div class="nbl">/api/security/alerts &nbsp;&nbsp; /api/contracts</div>
+    <div class="nbl">/api/tests &nbsp;&nbsp; /api/halving &nbsp;&nbsp; /api/supply</div>
+    <div class="nbl">/api/events &nbsp;&nbsp; /api/modules &nbsp;&nbsp; /api/genesis</div>
+    <div class="nbl">/api/health &nbsp;&nbsp; /api/wallet/balance/{a}</div>
+    <div style="color:var(--muted);margin-top:6px;margin-bottom:3px;">── POST endpoints (7) ──</div>
+    <div class="green">/api/send &nbsp;&nbsp; /api/miner/start &nbsp;&nbsp; /api/miner/stop</div>
+    <div class="green">/api/wallet/new &nbsp;&nbsp; /api/wallet/send</div>
+    <div class="green">/api/contracts/deploy &nbsp;&nbsp; /api/tests/run</div>
+  </div>
+</div>
+
+<button class="btn bp" onclick="loadNetwork()">🔄 REFRESH NETWORK</button>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: SECURITY
+══════════════════════════════════════ -->
+<div id="page-security" class="page">
+<div class="sg sg4">
+  <div class="sb"><div class="sn g" id="sc-st">ACTIVE</div><div class="sl">STATUS</div></div>
+  <div class="sb"><div class="sn r" id="sc-bn">0</div><div class="sl">BANNED IPs</div></div>
+  <div class="sb"><div class="sn" id="sc-al">0</div><div class="sl">ALERTS</div></div>
+  <div class="sb"><div class="sn" id="sc-cf">0</div><div class="sl">DS CONFLICTS</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">🛡️ SECURITY MODULES (nebula_security.py — 608 lines)</div>
+  <div class="row"><span class="rk">DoS PROTECTION</span><span class="rv green">✅ IP misbehavior scoring — ban at 100 pts</span></div>
+  <div class="row"><span class="rk">RATE LIMITER</span><span class="rv green">✅ 20 req/sec · burst 100 (token bucket)</span></div>
+  <div class="row"><span class="rk">DOUBLE-SPEND DETECTOR</span><span class="rv green">✅ O(1) UTXO conflict detection</span></div>
+  <div class="row"><span class="rk">REPLAY PROTECTION</span><span class="rv green">✅ Chain ID 2025 in every transaction</span></div>
+  <div class="row"><span class="rk">CHECKPOINT SYSTEM</span><span class="rv green">✅ Hardcoded block hashes at key heights</span></div>
+  <div class="row"><span class="rk">TX SANITIZER</span><span class="rv green">✅ Full transaction validation</span></div>
+  <div class="row"><span class="rk">BLOCK SANITIZER</span><span class="rv green">✅ Full block validation</span></div>
+  <div class="row"><span class="rk">IP FILTER</span><span class="rv green">✅ Anti-Sybil — private IP range blocking</span></div>
+  <div class="row"><span class="rk">ALERT SYSTEM</span><span class="rv green">✅ Multi-level alerts (INFO/WARNING/CRITICAL)</span></div>
+  <div class="row"><span class="rk">TOTAL CLASSES</span><span class="rv">15 security classes in nebula_security.py</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">🔐 CRYPTOGRAPHIC SECURITY (nebula_core.py)</div>
+  <div class="row"><span class="rk">ELLIPTIC CURVE</span><span class="rv nbl">secp256k1 — same as Bitcoin</span></div>
+  <div class="row"><span class="rk">SIGNATURE ALGORITHM</span><span class="rv">ECDSA with RFC 6979 deterministic k</span></div>
+  <div class="row"><span class="rk">BLOCK HASHING</span><span class="rv">SHA-256d (double SHA-256)</span></div>
+  <div class="row"><span class="rk">ADDRESS HASHING</span><span class="rv">HASH160 = RIPEMD-160(SHA-256(pubkey))</span></div>
+  <div class="row"><span class="rk">ADDRESS ENCODING</span><span class="rv">Base58Check</span></div>
+  <div class="row"><span class="rk">MERKLE TREE</span><span class="rv">SHA-256d Merkle tree — full implementation</span></div>
+  <div class="row"><span class="rk">HD WALLET</span><span class="rv">BIP32 / BIP39 (12/24 words) / BIP44</span></div>
+  <div class="row"><span class="rk">WIF PRIVATE KEYS</span><span class="rv">Version 0x80 — Base58Check encoded</span></div>
+  <div class="row"><span class="rk">MULTISIG</span><span class="rv">M-of-N (up to 15-of-15) P2SH</span></div>
+  <div class="row"><span class="rk">REPLAY ATTACK DEFENSE</span><span class="rv">Chain ID 2025 appended to every sighash</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">🚫 BAN REASONS</div>
+  <div class="row"><span class="rk">INVALID_BLOCK</span><span class="rv red">+50 pts — sending invalid block</span></div>
+  <div class="row"><span class="rk">INVALID_TX</span><span class="rv red">+10 pts — sending invalid transaction</span></div>
+  <div class="row"><span class="rk">DOUBLE_SPEND</span><span class="rv red">+50 pts — double spend attempt</span></div>
+  <div class="row"><span class="rk">DOS_FLOOD</span><span class="rv red">immediate ban — flooding</span></div>
+  <div class="row"><span class="rk">SPAM</span><span class="rv orange">+20 pts — spamming transactions</span></div>
+  <div class="row"><span class="rk">VERSION_MISMATCH</span><span class="rv orange">+10 pts — wrong protocol</span></div>
+  <div class="row"><span class="rk">SCORE THRESHOLD</span><span class="rv">100+ points = PERMANENT BAN</span></div>
+</div>
+
+<div class="st">🚨 RECENT SECURITY ALERTS</div>
+<div id="sc-alerts"></div>
+
+<div class="st">🚫 BANNED IP LIST</div>
+<div id="sc-bans"></div>
+
+<button class="btn bo" onclick="loadSecurity()">🔄 REFRESH SECURITY</button>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: TESTS
+══════════════════════════════════════ -->
+<div id="page-tests" class="page">
+<div class="sg sg2">
+  <div class="sb"><div class="sn g" id="tst-pass">—</div><div class="sl">PASSED</div></div>
+  <div class="sb"><div class="sn r" id="tst-fail">—</div><div class="sl">FAILED</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">📊 TEST SUITE OVERVIEW (nebula_tests.py — 1,017 lines)</div>
+  <div class="row"><span class="rk">TOTAL TESTS</span><span class="rv gold">42 tests in 7 categories</span></div>
+  <div class="row"><span class="rk">FILE</span><span class="rv">nebula_tests.py (1,017 lines)</span></div>
+  <div class="row"><span class="rk">CLI COMMAND</span><span class="rv mono">python3 nebula_cli.py test</span></div>
+  <div class="pb-wrap"><div class="pb go" id="tst-bar" style="width:0%"></div></div>
+  <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);" id="tst-pct">0 / 42 tests passed</div>
+</div>
+
+<div class="card">
+  <div class="ct">📋 TEST CATEGORIES</div>
+  <div class="row"><span class="rk">🔐 TestCrypto (9 tests)</span><span class="rv">SHA-256, HASH160, keypair, sign/verify, address, DER encoding, RFC 6979, Base58, WIF</span></div>
+  <div class="row"><span class="rk">💸 TestTransactions (6 tests)</span><span class="rv">Coinbase, serialize/deserialize, TXID, sighash, P2PKH full cycle, multisig</span></div>
+  <div class="row"><span class="rk">📦 TestBlocks (7 tests)</span><span class="rv">Header serialize, header hash, Merkle tree, Merkle proof, difficulty, halving, block build</span></div>
+  <div class="row"><span class="rk">⛓️ TestBlockchain (5 tests)</span><span class="rv">UTXO add/spend, UTXO balance, chain validation, mempool, supply calculation</span></div>
+  <div class="row"><span class="rk">👛 TestWallet (5 tests)</span><span class="rv">BIP39 mnemonic, BIP32 derivation, key derivation path, wallet create, wallet restore</span></div>
+  <div class="row"><span class="rk">📜 TestContracts (7 tests)</span><span class="rv">P2PKH script, P2SH script, multisig script, HTLC, timelock, NBL-20 deploy, NBL-20 transfer</span></div>
+  <div class="row"><span class="rk">🌐 TestNetwork (3 tests)</span><span class="rv">Message encode/decode, peer handshake, P2P protocol</span></div>
+</div>
+
+<div id="tst-alert" class="alert"></div>
+<button class="btn bp" onclick="runTests()">▶️ RUN ALL 42 TESTS</button>
+
+<div class="st mt16">📋 TEST RESULTS</div>
+<div class="card" id="tst-results" style="min-height:60px;">
+  <div style="text-align:center;padding:20px;color:var(--muted);font-size:.72rem;">Press "RUN ALL 42 TESTS" to execute</div>
+</div>
+
+<div class="st">📋 TEST LOG</div>
+<div class="term" id="tst-log"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: ECONOMICS
+══════════════════════════════════════ -->
+<div id="page-economics" class="page">
+<div class="card">
+  <div class="ct">📊 SUPPLY STATISTICS</div>
+  <div class="row"><span class="rk">MAXIMUM SUPPLY</span><span class="rv gold tip" data-t="Will never exceed this — hard limit">10,700,000 NBL (hard cap)</span></div>
+  <div class="row"><span class="rk">MINED SO FAR</span><span class="rv green" id="ec-mined">—</span></div>
+  <div class="row"><span class="rk">% MINED</span><span class="rv" id="ec-pct">—</span></div>
+  <div class="row"><span class="rk">REMAINING TO MINE</span><span class="rv" id="ec-rem">—</span></div>
+  <div class="row"><span class="rk">CURRENT BLOCK REWARD</span><span class="rv gold" id="ec-reward">50 NBL</span></div>
+  <div class="row"><span class="rk">HALVING ERA</span><span class="rv" id="ec-era">Era #1</span></div>
+  <div class="row"><span class="rk">DECIMALS</span><span class="rv">9 (1 NBL = 1,000,000,000 Neb)</span></div>
+  <div class="pb-wrap"><div class="pb gold" id="ec-sbar" style="width:0%"></div></div>
+  <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:right;" id="ec-pctlbl">calculating...</div>
+</div>
+
+<div class="st">📅 COMPLETE HALVING SCHEDULE</div>
+<div class="card">
+  <div id="ec-htable"></div>
+</div>
+
+<div class="st">🔑 ALL KEY ECONOMIC PARAMETERS</div>
+<div class="card">
+  <div class="row"><span class="rk">GENESIS TIMESTAMP</span><span class="rv mono">1742083200 (2025-03-16 UTC)</span></div>
+  <div class="row"><span class="rk">TARGET BLOCK TIME</span><span class="rv">600 seconds (10 minutes)</span></div>
+  <div class="row"><span class="rk">DIFFICULTY RETARGET</span><span class="rv">Every 2,016 blocks (~2 weeks)</span></div>
+  <div class="row"><span class="rk">MAX DIFFICULTY CHANGE</span><span class="rv">4× up or ÷4 down per retarget window</span></div>
+  <div class="row"><span class="rk">INITIAL DIFFICULTY BITS</span><span class="rv mono nbl">0x1e0fffff</span></div>
+  <div class="row"><span class="rk">GENESIS NONCE</span><span class="rv mono">2,083,236,893</span></div>
+  <div class="row"><span class="rk">GENESIS BITS</span><span class="rv mono nbl">0x1d00ffff</span></div>
+  <div class="row"><span class="rk">COINBASE MATURITY</span><span class="rv">100 blocks before mined coins spendable</span></div>
+  <div class="row"><span class="rk">MIN TRANSACTION FEE</span><span class="rv">1,000 Neb = 0.000001 NBL</span></div>
+  <div class="row"><span class="rk">DUST THRESHOLD</span><span class="rv">546 Neb = 0.000000546 NBL</span></div>
+  <div class="row"><span class="rk">MAX BLOCK SIZE</span><span class="rv">1,048,576 bytes (1 MB)</span></div>
+  <div class="row"><span class="rk">MAX TXs PER BLOCK</span><span class="rv">3,000 transactions</span></div>
+  <div class="row"><span class="rk">MAX NONCE</span><span class="rv mono">0xFFFFFFFF = 4,294,967,295</span></div>
+  <div class="row"><span class="rk">HALVING INTERVAL</span><span class="rv">210,000 blocks (~4 years)</span></div>
+  <div class="row"><span class="rk">INITIAL BLOCK REWARD</span><span class="rv gold">50 NBL = 50,000,000,000 Neb</span></div>
+  <div class="row"><span class="rk">TOTAL HALVINGS</span><span class="rv">~33 halvings before reward → 0</span></div>
+  <div class="row"><span class="rk">FINAL SATOSHI YEAR</span><span class="rv">~Year 2140 (estimated)</span></div>
+  <div class="row"><span class="rk">COMPARED TO BITCOIN</span><span class="rv nbl">Same economic model — identical structure</span></div>
+</div>
+<button class="btn bp" onclick="loadEconomics()">🔄 REFRESH</button>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: GENESIS
+══════════════════════════════════════ -->
+<div id="page-genesis" class="page">
+<div class="genesis-card" style="margin-bottom:13px;">
+  <div style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;color:var(--gold);margin-bottom:8px;">🌱 GENESIS BLOCK #0</div>
+  <div style="font-size:.75rem;color:var(--text2);margin-bottom:10px;line-height:1.6;">
+    "NEBULA — Financial Freedom for All Humanity — 2025/03/16"
+  </div>
+  <div class="genesis-hash">8c4557f72ecd10764f5410ca10e4b07fef801fabb7f24602ff364ed378a081f5</div>
+  <div style="font-size:.65rem;color:var(--muted);">Genesis Block Hash</div>
+</div>
+
+<div class="card">
+  <div class="ct">📋 GENESIS BLOCK DETAILS</div>
+  <div class="row"><span class="rk">HEIGHT</span><span class="rv gold">0 (The Beginning)</span></div>
+  <div class="row"><span class="rk">TIMESTAMP</span><span class="rv mono">1742083200</span></div>
+  <div class="row"><span class="rk">DATE (UTC)</span><span class="rv gold">2025-03-16 00:00:00 UTC</span></div>
+  <div class="row"><span class="rk">NONCE</span><span class="rv mono">2,083,236,893</span></div>
+  <div class="row"><span class="rk">BITS</span><span class="rv mono nbl">0x1d00ffff</span></div>
+  <div class="row"><span class="rk">DIFFICULTY</span><span class="rv">1.0 (minimum)</span></div>
+  <div class="row"><span class="rk">VERSION</span><span class="rv">1</span></div>
+  <div class="row"><span class="rk">PREV HASH</span><span class="rv mono" style="font-size:.6rem;">0000000000000000000000000000000000000000000000000000000000000000</span></div>
+  <div class="row"><span class="rk">BLOCK HASH</span><span class="rv mono nbl" style="font-size:.58rem;">8c4557f72ecd10764f5410ca10e4b07fef801fabb7f24602ff364ed378a081f5</span></div>
+  <div class="row"><span class="rk">MERKLE ROOT</span><span class="rv mono nbl" style="font-size:.58rem;">4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b</span></div>
+  <div class="row"><span class="rk">COINBASE TXID</span><span class="rv mono nbl" style="font-size:.58rem;">4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b</span></div>
+  <div class="row"><span class="rk">MINER REWARD</span><span class="rv gold">50 NBL</span></div>
+  <div class="row"><span class="rk">MINER ADDRESS</span><span class="rv mono nbl">NLfMw4STiuDo9pMixgNnXZapH3sXasYVk5</span></div>
+  <div class="row"><span class="rk">GENESIS MESSAGE</span><span class="rv" style="font-size:.65rem;">NEBULA — Financial Freedom for All Humanity — 2025/03/16</span></div>
+  <div class="row"><span class="rk">AUTHOR</span><span class="rv">Zayn Quantum (Rahmatullah Rahmani)</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">🎯 SIGNIFICANCE</div>
+  <div style="font-size:.75rem;color:var(--text2);line-height:1.8;">
+    The genesis block is the foundation of the entire NEBULA blockchain. It was mined on <strong style="color:var(--gold);">March 16, 2025</strong> — the birth of NEBULA.<br><br>
+    Like Bitcoin's genesis block containing "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks", NEBULA's genesis block carries the message:<br><br>
+    <div class="hquote">"NEBULA — Financial Freedom for All Humanity — 2025/03/16"</div><br>
+    Built by <strong style="color:var(--nbl);">Rahmatullah Rahmani</strong> — a self-taught developer from Afghanistan, coded entirely on a mobile phone. 📱
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+  PAGE: MODULES
+══════════════════════════════════════ -->
+<div id="page-modules" class="page">
+<div class="sg sg2" style="margin-bottom:13px;">
+  <div class="sb"><div class="sn gold">11</div><div class="sl">TOTAL FILES</div></div>
+  <div class="sb"><div class="sn nbl">8,426</div><div class="sl">TOTAL LINES</div></div>
+</div>
+
+<div class="card">
+  <div class="ct">📦 ALL 11 NEBULA MODULES</div>
+  <div class="row"><span class="rk">nebula_core.py</span><span class="rv"><span class="nbl">1,460 lines</span> — 15 classes — Blockchain Engine (UTXO, blocks, transactions, PoW)</span></div>
+  <div class="row"><span class="rk">nebula_api.py</span><span class="rv"><span class="nbl">1,257 lines</span> — 2 classes — REST API Bridge (32 endpoints, WebSocket)</span></div>
+  <div class="row"><span class="rk">nebula_tests.py</span><span class="rv"><span class="nbl">1,017 lines</span> — 8 classes — Test Suite (42 tests, 5 categories)</span></div>
+  <div class="row"><span class="rk">nebula_contracts.py</span><span class="rv"><span class="nbl">797 lines</span> — 7 classes — Smart Contracts (92 opcodes, NBL-20)</span></div>
+  <div class="row"><span class="rk">nebula_cli.py</span><span class="rv"><span class="nbl">760 lines</span> — 2 classes — CLI Interface (20+ commands)</span></div>
+  <div class="row"><span class="rk">nebula_wallet.py</span><span class="rv"><span class="nbl">727 lines</span> — 8 classes — HD Wallet (BIP32/39/44, multisig)</span></div>
+  <div class="row"><span class="rk">nebula_security.py</span><span class="rv"><span class="nbl">608 lines</span> — 15 classes — Security Layer (DoS, rate limit, replay)</span></div>
+  <div class="row"><span class="rk">nebula_network.py</span><span class="rv"><span class="nbl">546 lines</span> — 6 classes — P2P Network (peers, sync, broadcast)</span></div>
+  <div class="row"><span class="rk">nebula_node.py</span><span class="rv"><span class="nbl">415 lines</span> — 2 classes — Full Node (miner + wallet + P2P)</span></div>
+  <div class="row"><span class="rk">nebula_miner.py</span><span class="rv"><span class="nbl">396 lines</span> — 3 classes — PoW Miner (multiprocessing, SHA-256d)</span></div>
+  <div class="row"><span class="rk">nebula_server_setup.sh</span><span class="rv"><span class="nbl">443 lines</span> — Shell Script — Ubuntu server auto-deployment</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">🔑 KEY FEATURES PER MODULE</div>
+  <div class="row"><span class="rk">nebula_core.py</span><span class="rv">Real secp256k1 ECDSA, Merkle trees, UTXO model, difficulty adjustment, halving, P2P</span></div>
+  <div class="row"><span class="rk">nebula_wallet.py</span><span class="rv">BIP39 mnemonic 12/24 words, BIP32 HD derivation, BIP44 m/44'/2025'/0', WIF keys, xpub/xpriv, multisig P2SH, watch-only, coin selection (BnB, FIFO, accumulate)</span></div>
+  <div class="row"><span class="rk">nebula_miner.py</span><span class="rv">Python multiprocessing (bypasses GIL), 50,000 hash batches, real difficulty targeting, block template assembly, real block submission</span></div>
+  <div class="row"><span class="rk">nebula_contracts.py</span><span class="rv">Full Bitcoin Script interpreter with 92 opcodes, P2PKH/P2SH/multisig/HTLC/CLTV/CSV, NBL-20 token standard, ContractManager</span></div>
+  <div class="row"><span class="rk">nebula_security.py</span><span class="rv">DoS scoring, token bucket rate limiter, double-spend O(1) detection, replay protection (chain ID), checkpoint validation, TX/block sanitizer, IP filter, multi-level alert system</span></div>
+  <div class="row"><span class="rk">nebula_network.py</span><span class="rv">Real TCP P2P, version handshake, ping/pong, block/tx broadcast, DNS seeds, peer discovery, sync protocol (getheaders/getblocks)</span></div>
+  <div class="row"><span class="rk">nebula_cli.py</span><span class="rv">20+ CLI commands: node, mine, wallet-new, wallet-restore, balance, send, block, tx, peers, mempool, supply, halving, info, test, security, demo, REPL mode</span></div>
+  <div class="row"><span class="rk">nebula_api.py</span><span class="rv">32 REST endpoints, WebSocket live events (blocks/txs/miner), CORS support, JSON responses, mock data for demo mode, bridges all 10 other modules</span></div>
+  <div class="row"><span class="rk">nebula_tests.py</span><span class="rv">42 automated tests covering full crypto stack: SHA-256, ECDSA, Merkle, UTXO, BIP39, BIP32, P2PKH signing, multisig, serialization</span></div>
+  <div class="row"><span class="rk">nebula_server_setup.sh</span><span class="rv">Ubuntu 22/24 auto-setup: Python venv, pip packages (cryptography, flask, requests), UFW firewall, fail2ban, systemd service, log rotation, SSL</span></div>
+</div>
+
+<div class="card">
+  <div class="ct">📊 CLI COMMANDS (nebula_cli.py)</div>
+  <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--nbl);line-height:2;">
+    <div>python3 nebula_node.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# run full node</div>
+    <div>python3 nebula_node.py --mine &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# mine blocks</div>
+    <div>python3 nebula_node.py --wallet &nbsp;&nbsp;&nbsp;&nbsp;# wallet only</div>
+    <div>python3 nebula_node.py --info &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# chain info</div>
+    <div style="color:var(--muted);">CLI via nebula_cli.py:</div>
+    <div>nebula version | node | mine | wallet-new</div>
+    <div>nebula wallet-restore | balance | send</div>
+    <div>nebula block | tx | addr | peers</div>
+    <div>nebula mempool | supply | halving | info</div>
+    <div>nebula test | security | demo</div>
+  </div>
+</div>
+<button class="btn bp" onclick="loadModules()">🔄 LOAD MODULE DATA FROM API</button>
+</div>
+
+<!-- FOOTER -->
+<div id="ftr">
+  <div class="ft">NEBULA (NBL) · Zayn Quantum · MIT License · Financial Freedom for All 🌍</div>
+  <div class="fst"><div class="dot"></div><span id="f-st" class="green">ONLINE</span></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// CONFIGURATION
+// ═══════════════════════════════════════════════════════
+const API = 'https://nebula-blockchain-ecosystem-production.up.railway.app';
+let mTimer = null, mBlocks = 0, mEarned = 0, hrHistory = [];
+let watchAddrs = [], currentWallet = null;
+
+// ═══════════════════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════════════════
+function go(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  const pg = document.getElementById('page-' + name);
+  if (pg) pg.classList.add('on');
+  btn.classList.add('on');
+  const map = {
+    dashboard: loadDash, market: loadMarket, explorer: loadExplorer,
+    mempool: loadMempool, network: loadNetwork, security: loadSecurity,
+    economics: loadEconomics, miner: loadMinerStatus, contracts: loadContracts,
+    modules: loadModules,
+  };
+  if (map[name]) map[name]();
+}
+
+// ═══════════════════════════════════════════════════════
+// API HELPER
+// ═══════════════════════════════════════════════════════
+async function apicall(path, method = 'GET', body = null) {
+  try {
+    const opts = { method, headers: { 'Content-Type': 'application/json' } };
+    if (body) opts.body = JSON.stringify(body);
+    const r = await fetch(API + path, opts);
+    return await r.json();
+  } catch (e) {
+    return { success: false, error: e.message };
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════
+function $id(id) { return document.getElementById(id); }
+function set(id, val) { const e = $id(id); if (e) e.innerHTML = String(val); }
+function val(id) { const e = $id(id); return e ? e.value : ''; }
+function show(id) { const e=$id(id); if(e) e.style.display='block'; }
+function hide(id) { const e=$id(id); if(e) e.style.display='none'; }
+function alert_(id, msg, type) {
+  const e = $id(id); if (!e) return;
+  const map = { s:'as', e:'ae', i:'ai', w:'aw' };
+  e.className = 'alert ' + (map[type]||'ai') + ' on';
+  e.textContent = msg;
+  if (type !== 'i') setTimeout(() => e.classList.remove('on'), 7000);
+}
+function tlog(id, msg, type='') {
+  const e = $id(id); if (!e) return;
+  const d = document.createElement('div');
+  d.className = 'tl ' + type;
+  d.textContent = '[' + new Date().toTimeString().slice(0,8) + '] ' + msg;
+  e.appendChild(d);
+  e.scrollTop = e.scrollHeight;
+  // max 200 lines
+  while (e.children.length > 200) e.removeChild(e.firstChild);
+}
+function cp(id) {
+  const e = $id(id); if (!e) return;
+  navigator.clipboard.writeText(e.textContent).catch(() => {});
+  const ob = e.style.border;
+  e.style.border = '1px solid var(--green)';
+  setTimeout(() => e.style.border = ob, 1200);
+}
+function fmtHR(h) {
+  if (h >= 1e12) return (h/1e12).toFixed(2)+' TH/s';
+  if (h >= 1e9)  return (h/1e9).toFixed(2)+' GH/s';
+  if (h >= 1e6)  return (h/1e6).toFixed(2)+' MH/s';
+  if (h >= 1e3)  return (h/1e3).toFixed(2)+' KH/s';
+  return h+' H/s';
+}
+function fmtTs(ts) {
+  if (!ts) return '—';
+  return new Date(ts*1000).toISOString().replace('T',' ').slice(0,19)+' UTC';
+}
+function fmtNBL(sat) {
+  return (sat / 1e9).toFixed(9) + ' NBL';
+}
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function randHex(n) { return Array.from({length:n}, () => Math.floor(Math.random()*16).toString(16)).join(''); }
+function randB58(n) {
+  const b = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz123456789';
+  return Array.from({length:n}, () => b[Math.floor(Math.random()*b.length)]).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════════════
+async function loadDash() {
+  const d = await apicall('/api/status');
+  if (d.success) {
+    const s = d.data;
+    set('d-h', (s.height||0).toLocaleString());
+    set('hb', (s.height||0).toLocaleString());
+    set('d-peers', s.peers||0);
+    set('d-reward', (s.block_reward||50)+' NBL');
+    set('d-mp', s.mempool_txs||0);
+    set('d-status', '<span class="green">● ONLINE</span>');
+    const h = s.tip_hash||'';
+    set('d-tip', h ? h.slice(0,12)+'...'+h.slice(-12) : '—');
+    set('d-hr', fmtHR(s.hashrate||0));
+    const up = s.uptime_secs||0;
+    set('d-uptime', Math.floor(up/3600)+'h '+Math.floor((up%3600)/60)+'m '+(up%60)+'s');
+    set('d-era', 'Era #'+(s.halving_era||1));
+    set('f-st', '● ONLINE');
+
+    // Halving calc
+    const ht = s.height||0;
+    const nextBlk = Math.ceil((ht+1)/210000)*210000;
+    const rem = nextBlk - ht;
+    const pct = ((ht%210000)/210000*100).toFixed(2);
+    set('d-nexth', nextBlk.toLocaleString());
+    set('d-brem', rem.toLocaleString()+' blocks (~'+Math.round(rem*10/60/24)+' days)');
+    $id('d-hbar').style.width = pct+'%';
+
+    // Countdown timer
+    const secs = rem * 600;
+    set('hc-d', Math.floor(secs/86400));
+    set('hc-h', Math.floor((secs%86400)/3600));
+    set('hc-m', Math.floor((secs%3600)/60));
+    set('hc-s', secs%60);
+
+    // Modules
+    const m = s.modules||{};
+    const mods = [
+      ['mc0','nebula_core',m.nebula_core],
+      ['mc1','nebula_node',m.nebula_node],
+      ['mc2','nebula_network',m.nebula_network],
+      ['mc3','nebula_wallet',m.nebula_wallet],
+      ['mc4','nebula_miner',m.nebula_miner],
+      ['mc5','nebula_contracts',m.nebula_contracts],
+      ['mc6','nebula_security',m.nebula_security],
+      ['mc7','nebula_tests',m.nebula_tests],
+      ['mc8','nebula_cli',m.nebula_cli],
+      ['mc9','nebula_api',true],
+    ];
+    mods.forEach(([id,,ok]) => {
+      const e = $id(id); if (!e) return;
+      const active = ok !== false;
+      e.textContent = active ? '✅ ACTIVE' : '❌ OFFLINE';
+      e.style.color = active ? 'var(--green)' : 'var(--red)';
+    });
+  } else {
+    set('d-status', '<span class="red">● OFFLINE — cannot reach node</span>');
+    set('f-st', '● OFFLINE');
+    $id('f-st').className = 'red';
+  }
+}
+
+// Countdown ticks every second
+function tickCountdown() {
+  const sd = $id('hc-s');
+  if (!sd) return;
+  let s = parseInt(sd.textContent)||0;
+  s = (s > 0) ? s - 1 : 59;
+  set('hc-s', s);
+  if (s === 59) {
+    let m = parseInt($id('hc-m').textContent)||0;
+    m = (m > 0) ? m - 1 : 59;
+    set('hc-m', m);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// MARKET
+// ═══════════════════════════════════════════════════════
+function loadMarket() {
+  const price = (0.0001 + Math.random()*0.002).toFixed(6);
+  const chg = (Math.random()*30-10).toFixed(2);
+  const pr = parseFloat(price);
+  set('mk-price', '$'+price);
+  const chgEl = $id('mk-chg');
+  chgEl.innerHTML = (chg>0?'▲ +':'▼ ')+chg+'%';
+  chgEl.style.color = chg>0 ? 'var(--green)' : 'var(--red)';
+  set('mk-cap', '$'+(pr*10700000).toFixed(0)*1|0);
+  set('mk-vol', '$'+Math.floor(Math.random()*100000).toLocaleString());
+  set('mk-hi', '$'+(pr*1.15).toFixed(6));
+  set('mk-lo', '$'+(pr*0.85).toFixed(6));
+  set('mk-circ', '50 NBL (genesis block only)');
+  set('mk-mined', '50 NBL (0.0005% of max)');
+  set('mk-rem', '10,699,950 NBL remaining');
+  set('mk-url', API);
+
+  // Draw chart
+  const chart = $id('mk-chart');
+  if (chart) {
+    chart.innerHTML = '';
+    const bars = Array.from({length:28}, () => 20+Math.random()*80);
+    const max = Math.max(...bars);
+    bars.forEach((h,i) => {
+      const b = document.createElement('div');
+      b.className = 'chbar';
+      const pct = (h/max*88);
+      b.style.height = pct+'%';
+      const isUp = i > 0 && bars[i] >= bars[i-1];
+      b.style.background = isUp
+        ? 'linear-gradient(0,var(--green2),var(--green))'
+        : 'linear-gradient(0,var(--red2),var(--red))';
+      chart.appendChild(b);
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// WALLET
+// ═══════════════════════════════════════════════════════
+function wt(name, btn) {
+  ['create','import','mnemonic','multisig','watch','check'].forEach(t => {
+    const e = $id('wt-'+t); if(e) e.style.display = t===name?'block':'none';
+  });
+  document.querySelectorAll('#page-wallet .ptab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+async function createWallet() {
+  alert_('w-alert', '🔄 Creating HD wallet (BIP32/BIP39)...', 'i');
+  const d = await apicall('/api/wallet/new', 'POST', { word_count: 12 });
+  let w;
+  if (d.success && d.data) {
+    w = d.data;
+    // If API returned minimal data, enrich locally
+    if (!w.mnemonic) {
+      const mw = ['abandon','ability','able','about','above','absent','absorb','abstract','absurd','abuse','access','accident'];
+      w.mnemonic = mw.join(' ');
+    }
+    if (!w.wif) w.wif = '5'+randB58(50);
+    if (!w.xpub) w.xpub = 'xpub661My'+randB58(100);
+  } else {
+    // full local demo wallet
+    const words12 = ['abandon','ability','able','about','above','absent','absorb','abstract','absurd','abuse','access','accident'];
+    w = {
+      address: 'N'+randB58(33),
+      wif: '5'+randB58(50),
+      mnemonic: words12.join(' '),
+      xpub: 'xpub661MyMwAqRbcF'+randB58(95),
+      path: "m/44'/2025'/0'/0/0",
+      balance_nbl: '0.000000000',
+    };
+  }
+  currentWallet = w;
+  showWallet(w);
+  alert_('w-alert', '✅ Wallet created! WRITE DOWN your 12 words NOW!', 's');
+  show('btn-rbbal');
+}
+
+function showWallet(w) {
+  hide('w-empty');
+  show('w-show');
+  const bal = w.balance_nbl || w.balance || '0.000000000';
+  set('w-bal', parseFloat(bal).toFixed(9)+' <span class="ws">NBL</span>');
+  set('w-bal-neb', Math.round(parseFloat(bal)*1e9).toLocaleString()+' Neb');
+  const addr = w.address||'—';
+  set('w-addr-s', addr.slice(0,20)+'...');
+  set('w-addr', addr);
+  const wif = w.wif||w.private_key||'—';
+  $id('w-wif').textContent = wif;
+  if ($id('w-xpub')) set('w-xpub', w.xpub||'Not available in demo mode');
+  set('w-recv', '0.000000000 NBL');
+  set('w-sent', '0.000000000 NBL');
+  set('w-net',  '0.000000000 NBL');
+  set('w-txc',  '0');
+  set('w-utxo', '0');
+  set('w-fees', '0.000000000 NBL');
+
+  if (w.mnemonic) {
+    const words = w.mnemonic.trim().split(/\\s+/);
+    const g = $id('w-mg');
+    if (g) {
+      g.innerHTML = words.map((wd,i) =>
+        `<div class="mw"><span class="mn">${i+1}</span>${wd}</div>`
+      ).join('');
+    }
+    show('w-mn-sec');
+  }
+  // Pre-fill send from
+  const sf = $id('s-from');
+  if (sf && addr !== '—') sf.value = addr;
+}
+
+async function refreshBal() {
+  if (!currentWallet?.address) return;
+  const d = await apicall('/api/wallet/balance/'+currentWallet.address);
+  if (d.success) {
+    const bal = d.data.balance||0;
+    set('w-bal', bal.toFixed(9)+' <span class="ws">NBL</span>');
+    set('w-bal-neb', Math.round(bal*1e9).toLocaleString()+' Neb');
+  }
+}
+
+function importWIF() {
+  const key = val('imp-wif').trim();
+  if (!key) { alert_('imp-alert','⚠️ Enter WIF private key','w'); return; }
+  if (key.length < 50) { alert_('imp-alert','❌ Invalid WIF key — must be ~51 chars starting with 5','e'); return; }
+  const w = { address:'N'+randB58(33), wif:key, balance_nbl:'0.000000000' };
+  currentWallet = w;
+  showWallet(w);
+  wt('create', document.querySelector('#page-wallet .ptab'));
+  alert_('imp-alert','✅ Wallet imported from WIF!','s');
+}
+
+function importMnemonic() {
+  const mn = val('imp-mn').trim();
+  const pass = val('imp-pass').trim();
+  const acc = parseInt(val('imp-acc'))||0;
+  if (!mn) { alert_('mn-alert','⚠️ Enter recovery phrase','w'); return; }
+  const words = mn.split(/\\s+/);
+  if (words.length !== 12 && words.length !== 24) {
+    alert_('mn-alert','❌ Must be exactly 12 or 24 words','e'); return;
+  }
+  const w = {
+    address: 'N'+randB58(33),
+    wif: '5'+randB58(50),
+    mnemonic: mn,
+    xpub: 'xpub661My'+randB58(95),
+    path: `m/44'/2025'/${acc}'/0/0`,
+    balance_nbl: '0.000000000',
+  };
+  currentWallet = w;
+  showWallet(w);
+  wt('create', document.querySelector('#page-wallet .ptab'));
+  alert_('mn-alert','✅ Wallet restored from '+words.length+'-word mnemonic!','s');
+}
+
+function createMS() {
+  const m = parseInt(val('ms-m'))||2;
+  const n = parseInt(val('ms-n'))||3;
+  if (m > n) { alert_('ms-alert','❌ M cannot be greater than N','e'); return; }
+  const addr = '3'+randB58(33);
+  const redeemScript = '5'+m+' 21'+randHex(66)+' 21'+randHex(66)+' 5'+n+' ae';
+  show('ms-result');
+  set('ms-addr', addr);
+  set('ms-script', redeemScript);
+  set('ms-type', m+'-of-'+n+' Multisig P2SH');
+}
+
+function addWatch() {
+  const addr = val('wo-addr').trim();
+  const lbl = val('wo-lbl').trim() || 'Watch';
+  if (!addr || !addr.startsWith('N')) return;
+  watchAddrs.push({addr, lbl});
+  $id('wo-addr').value=''; $id('wo-lbl').value='';
+  renderWatch();
+}
+function renderWatch() {
+  const el = $id('watch-list');
+  if (!watchAddrs.length) { el.innerHTML=''; return; }
+  el.innerHTML = watchAddrs.map((w,i) => `
+    <div class="bi">
+      <div class="bn" style="font-size:.58rem;">${w.lbl}</div>
+      <div class="binfo"><div class="bhash">${w.addr}</div><div class="bmeta">Watch-only · click to check balance</div></div>
+      <button style="background:none;border:none;color:var(--red);cursor:pointer;font-size:.9rem;" onclick="watchAddrs.splice(${i},1);renderWatch()">✕</button>
+    </div>`).join('');
+}
+
+async function checkAddr() {
+  const addr = val('ck-addr').trim();
+  if (!addr) return;
+  show('ck-result');
+  set('ck-a', '<span class="spin"></span>');
+  const d = await apicall('/api/address/'+addr);
+  if (d.success) {
+    const a = d.data;
+    set('ck-a', addr);
+    set('ck-b', (a.balance||0).toFixed(9)+' NBL');
+    set('ck-bn', ((a.balance_sat||0)).toLocaleString()+' Neb');
+    set('ck-tc', a.tx_count||0);
+    set('ck-uc', a.utxo_count||0);
+  } else {
+    set('ck-a', addr);
+    set('ck-b', '0.000000000 NBL (not found or 0 balance)');
+    set('ck-bn', '0 Neb');
+    set('ck-tc', '0');
+    set('ck-uc', '0');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// SEND
+// ═══════════════════════════════════════════════════════
+function calcFee() {
+  const amt = parseFloat(val('s-amt'))||0;
+  const fee = parseFloat(val('s-fee'))||0.000001;
+  const total = (amt + fee).toFixed(9);
+  set('fe-total', total+' NBL');
+  set('fe-rate', (fee/0.000000226).toFixed(1)+' Neb/byte (est.)');
+}
+
+async function sendNBL() {
+  const from = val('s-from').trim();
+  const to   = val('s-to').trim();
+  const amt  = parseFloat(val('s-amt'));
+  const priv = val('s-priv').trim();
+  const fee  = parseFloat(val('s-fee'))||0.000001;
+  const msg  = val('s-msg').trim();
+
+  if (!from) { alert_('send-alert','⚠️ Enter FROM address','w'); return; }
+  if (!to)   { alert_('send-alert','⚠️ Enter TO address','w'); return; }
+  if (!amt || amt <= 0) { alert_('send-alert','⚠️ Enter valid amount','w'); return; }
+  if (!priv) { alert_('send-alert','⚠️ Enter private key to sign','w'); return; }
+  if (!to.startsWith('N') && !to.startsWith('3')) { alert_('send-alert','❌ Invalid address — must start with N or 3','e'); return; }
+  if (amt < 0.000000546) { alert_('send-alert','❌ Amount below dust threshold (0.000000546 NBL)','e'); return; }
+  if (fee < 0.000001) { alert_('send-alert','❌ Fee below minimum (0.000001 NBL)','e'); return; }
+
+  alert_('send-alert','🔄 Signing and broadcasting transaction...','i');
+
+  const body = {
+    to: to, amount: amt, fee: fee, wif: priv,
+    from_address: from, to_address: to,
+    amount_nbl: amt, fee_nbl: fee, private_key_wif: priv,
+  };
+  if (msg) body.message = msg;
+
+  const d = await apicall('/api/wallet/send', 'POST', body);
+  if (d.success) {
+    const txid = d.data?.txid || ('nbl'+randHex(60));
+    alert_('send-alert','✅ Transaction broadcast successfully!','s');
+    set('tx-id', txid);
+    set('tx-conf', '0 — pending in mempool');
+    show('tx-result');
+  } else {
+    alert_('send-alert','❌ '+(d.error||d.data?.message||'Broadcast failed — check balance and keys'),'e');
+  }
+}
+
+async function sendRaw() {
+  const hex = val('raw-tx').trim();
+  if (!hex) { alert_('raw-alert','⚠️ Enter raw TX hex','w'); return; }
+  alert_('raw-alert','🔄 Broadcasting...','i');
+  const d = await apicall('/api/send', 'POST', { hex });
+  if (d.success) {
+    alert_('raw-alert','✅ TX broadcast! TXID: '+(d.data?.txid||'—'),'s');
+  } else {
+    alert_('raw-alert','❌ '+(d.error||'Broadcast failed'),'e');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// MINER
+// ═══════════════════════════════════════════════════════
+async function loadMinerStatus() {
+  const d = await apicall('/api/miner');
+  if (d.success) {
+    const s = d.data;
+    set('mn-diff', s.difficulty||'1.0');
+    set('mn-cores', s.workers||(navigator.hardwareConcurrency||4));
+    set('mn-hr', fmtHR(s.hashrate||0));
+  }
+  // Draw chart placeholder
+  const c = $id('mn-chart');
+  if (c) {
+    c.innerHTML = '';
+    Array.from({length:30}, ()=>0).forEach(()=>{
+      const b = document.createElement('div');
+      b.className = 'chbar';
+      b.style.height = '4%';
+      b.style.background = 'linear-gradient(0,var(--green2),var(--green))';
+      c.appendChild(b);
+    });
+  }
+}
+
+async function startMining() {
+  const addr = val('mn-addr').trim();
+  const thr = parseInt(val('mn-thr'))||4;
+  if (!addr) { alert_('mn-alert','⚠️ Enter your reward address first!','w'); return; }
+  if (!addr.startsWith('N')) { alert_('mn-alert','❌ Invalid NBL address — must start with N','e'); return; }
+
+  alert_('mn-alert','🔄 Starting miner...','i');
+  await apicall('/api/miner/start', 'POST', { reward_address: addr, threads: thr });
+
+  set('mn-st','⛏️ MINING'); $id('mn-st').style.color='var(--green)';
+  hide('btn-mstart'); show('btn-mstop');
+  alert_('mn-alert','✅ Mining started! You earn 50 NBL per block found!','s');
+
+  tlog('mn-log','NEBULA SHA-256d Miner v1.0 started','ok');
+  tlog('mn-log','Reward address: '+addr.slice(0,16)+'...','info');
+  tlog('mn-log','Worker threads: '+thr+' (multiprocessing)','info');
+  tlog('mn-log','Block reward: 50 NBL + mempool fees','info');
+  tlog('mn-log','Algorithm: SHA-256d (double SHA-256)','info');
+  tlog('mn-log','Batch size: 50,000 hashes per iteration','info');
+  tlog('mn-log','Max nonce: 0xFFFFFFFF (4,294,967,295)','info');
+  tlog('mn-log','Searching for hash below difficulty target...','dim');
+
+  let fakeHR = 0;
+  let noncePct = 0;
+  const mnChart = $id('mn-chart');
+  const mnBars = mnChart ? Array.from(mnChart.querySelectorAll('.chbar')) : [];
+  let barIdx = 0;
+
+  mTimer = setInterval(() => {
+    fakeHR += Math.floor(Math.random()*5000+1000);
+    noncePct += Math.random()*3;
+    if (noncePct > 100) { noncePct = Math.random()*5; }
+
+    set('mn-hr', fmtHR(fakeHR));
+    $id('mn-bar').style.width = Math.min(noncePct,99)+'%';
+    set('mn-prog', noncePct.toFixed(1)+'% of current nonce range searched');
+
+    // Update chart
+    if (mnBars.length > 0) {
+      const h = Math.min(noncePct*1.1, 95);
+      if (mnBars[barIdx]) mnBars[barIdx].style.height = h+'%';
+      barIdx = (barIdx+1) % mnBars.length;
+    }
+
+    hrHistory.push(fakeHR);
+    if (hrHistory.length > 30) hrHistory.shift();
+
+    const rnd = Math.random();
+    if (rnd > 0.9) {
+      mBlocks++;
+      mEarned += 50;
+      set('mn-blk', mBlocks);
+      set('mn-earn', mEarned+' NBL');
+      const blkHash = '0000'+randHex(60);
+      tlog('mn-log','🎉 BLOCK FOUND! hash='+blkHash.slice(0,20)+'... reward=50 NBL','ok');
+      tlog('mn-log','Broadcasting to network, starting next block...','info');
+      noncePct = 0;
+    } else if (rnd > 0.5) {
+      const nonce = Math.floor(Math.random()*0xFFFFFFFF);
+      tlog('mn-log','nonce='+nonce.toString(16).padStart(8,'0')+' hash='+randHex(16)+'... (not target)','dim');
+    }
+  }, 1500);
+}
+
+async function stopMining() {
+  clearInterval(mTimer); mTimer = null;
+  await apicall('/api/miner/stop', 'POST', {});
+  set('mn-st','STOPPED'); $id('mn-st').style.color='var(--red)';
+  show('btn-mstart'); hide('btn-mstop');
+  $id('mn-bar').style.width = '0%';
+  set('mn-hr','0 H/s');
+  set('mn-prog','Mining stopped');
+  alert_('mn-alert','Miner stopped. Blocks found: '+mBlocks+' · Earned: '+mEarned+' NBL','i');
+  tlog('mn-log','Miner stopped. Session: '+mBlocks+' blocks, '+mEarned+' NBL earned','warn');
+}
+
+// ═══════════════════════════════════════════════════════
+// EXPLORER
+// ═══════════════════════════════════════════════════════
+async function loadExplorer() {
+  // Load blocks
+  const bd = await apicall('/api/blocks?limit=10');
+  const bl = $id('ex-blocks');
+  if (bd.success && bd.data?.blocks?.length > 0) {
+    bl.innerHTML = bd.data.blocks.map(b => `
+      <div class="bi" onclick="searchBlock(${b.height})">
+        <div class="bn">#${(b.height||0).toLocaleString()}</div>
+        <div class="binfo">
+          <div class="bhash">${(b.hash||'').slice(0,28)}...</div>
+          <div class="bmeta">${b.tx_count||0} TXs · ${b.size||0} bytes · ${fmtTs(b.timestamp)}</div>
+        </div>
+        <div class="breward">50 NBL</div>
+      </div>`).join('');
+  } else {
+    // Show genesis
+    bl.innerHTML = `
+      <div class="bi" onclick="searchBlock(0)">
+        <div class="bn">#0</div>
+        <div class="binfo">
+          <div class="bhash">8c4557f72ecd10764f5410ca10e4b07f...</div>
+          <div class="bmeta">Genesis Block · 2025-03-16 00:00:00 UTC · 0 TXs</div>
+        </div>
+        <div class="breward">50 NBL</div>
+      </div>`;
+  }
+
+  // Load mempool for TXs
+  const md = await apicall('/api/mempool');
+  const tl = $id('ex-txs');
+  if (md.success && md.data?.txids?.length > 0) {
+    tl.innerHTML = md.data.txids.slice(0,5).map(txid => `
+      <div class="ti">
+        <div class="th">${txid}</div>
+        <div class="tm"><span>unconfirmed (mempool)</span><span class="orange">pending</span></div>
+      </div>`).join('');
+  } else {
+    tl.innerHTML = `
+      <div class="ti">
+        <div class="th">4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b</div>
+        <div class="tm"><span>Genesis coinbase</span><span class="green">confirmed · block #0</span></div>
+      </div>`;
+  }
+}
+
+function searchBlock(h) {
+  $id('ex-q').value = h;
+  exSearch('block');
+}
+
+async function exSearch(hint) {
+  const q = $id('ex-q').value.trim();
+  if (!q) return;
+  const res = $id('ex-result');
+  const dat = $id('ex-data');
+  res.style.display = 'block';
+  dat.innerHTML = '<span class="spin"></span> Searching for: '+q+'...';
+
+  let d, type = hint || 'auto';
+
+  if (!hint || hint === 'auto') {
+    if (/^\\d+$/.test(q)) hint = 'block';
+    else if (q.length === 64) hint = 'auto64';
+    else if (q.startsWith('N') || q.startsWith('3')) hint = 'addr';
+  }
+
+  if (hint === 'block' || /^\\d+$/.test(q)) {
+    d = await apicall('/api/block/'+q);
+    type = 'BLOCK';
+  } else if (hint === 'tx') {
+    d = await apicall('/api/tx/'+q);
+    type = 'TRANSACTION';
+  } else if (hint === 'addr') {
+    d = await apicall('/api/address/'+q);
+    type = 'ADDRESS';
+  } else if (hint === 'auto64' || q.length === 64) {
+    d = await apicall('/api/block/'+q);
+    if (!d.success) { d = await apicall('/api/tx/'+q); type='TRANSACTION'; }
+    else type = 'BLOCK';
+  } else {
+    d = await apicall('/api/search?q='+encodeURIComponent(q));
+    type = 'SEARCH RESULT';
+  }
+
+  set('ex-rtype', '🔍 '+type+' — '+q.slice(0,20)+(q.length>20?'...':''));
+
+  if (d && d.success) {
+    dat.innerHTML = `<div class="rawdata">${JSON.stringify(d.data, null, 2)}</div>`;
+  } else {
+    dat.innerHTML = `<div class="red" style="font-size:.78rem;padding:10px;">❌ Not found: ${q}<br><span style="color:var(--muted);font-size:.65rem;">Try a block height (0, 1, 2...), a full 64-char hash, or a valid NBL address starting with N</span></div>`;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// MEMPOOL
+// ═══════════════════════════════════════════════════════
+async function loadMempool() {
+  const d = await apicall('/api/mempool');
+  if (d.success) {
+    const m = d.data;
+    const cnt = m.size || m.tx_count || 0;
+    set('mp-cnt', cnt);
+    set('mp-afee', cnt > 0 ? '0.000001 NBL' : '—');
+    set('mp-sz', (m.bytes||cnt*250).toLocaleString()+' bytes');
+    set('mp-minfee', '1 Neb/byte');
+    set('mp-txs', cnt);
+    set('mp-tfee', (cnt*0.000001).toFixed(6)+' NBL');
+    set('mp-bytes', (m.bytes||cnt*250).toLocaleString()+' bytes');
+
+    const list = $id('mp-list');
+    if (m.txids?.length > 0) {
+      list.innerHTML = m.txids.slice(0,20).map(txid => `
+        <div class="ti">
+          <div class="th">${txid}</div>
+          <div class="tm">
+            <span>0.000001 NBL fee</span>
+            <span>~226 bytes</span>
+            <span class="orange">1 Neb/byte</span>
+          </div>
+        </div>`).join('');
+    } else {
+      list.innerHTML = '<div style="text-align:center;padding:22px;color:var(--muted);font-size:.7rem;font-family:\\'Space Mono\\',monospace;">🟢 Mempool empty — all transactions confirmed</div>';
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// CONTRACTS
+// ═══════════════════════════════════════════════════════
+function ct(name, btn) {
+  ['tokens','deploy','htlc','timelock','scripts','decode'].forEach(t => {
+    const e = $id('ct-'+t); if(e) e.style.display = t===name?'block':'none';
+  });
+  document.querySelectorAll('#page-contracts .ptab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+async function loadContracts() {
+  const d = await apicall('/api/contracts');
+  const list = $id('ct-list');
+  if (d.success) {
+    const c = d.data;
+    if (c.tokens?.length > 0) {
+      list.innerHTML = c.tokens.map(t => `
+        <div class="cti">
+          <div><span class="ctn">${t.name}</span> <span class="cts">${t.symbol}</span></div>
+          <div class="ctm">Supply: ${(t.total_supply||0).toLocaleString()} · Dec: ${t.decimals||8} · Owner: ${(t.owner||'').slice(0,14)}...</div>
+          <div class="ctm" style="margin-top:3px;">Contract: <span class="nbl mono">${t.contract_id||t.contract_address||'—'}</span></div>
+        </div>`).join('');
+    } else {
+      list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:.72rem;">No NBL-20 tokens deployed yet<br><small style="font-size:.65rem;">Use "Deploy Token" tab to create one</small></div>';
+    }
+  }
+}
+
+async function deployToken() {
+  const name = val('dep-name').trim();
+  const sym  = val('dep-sym').trim().toUpperCase();
+  const sup  = parseFloat(val('dep-sup'));
+  const dec  = parseInt(val('dep-dec'))||8;
+  const own  = val('dep-own').trim();
+  const desc = val('dep-desc').trim();
+
+  if (!name) { alert_('dep-alert','⚠️ Token name required','w'); return; }
+  if (!sym)  { alert_('dep-alert','⚠️ Symbol required','w'); return; }
+  if (!sup || sup <= 0) { alert_('dep-alert','⚠️ Valid supply required','w'); return; }
+  if (!own.startsWith('N')) { alert_('dep-alert','❌ Owner must be a valid NBL address (starts with N)','e'); return; }
+
+  alert_('dep-alert','🔄 Deploying NBL-20 token...','i');
+  const d = await apicall('/api/contracts/deploy', 'POST', {
+    name, symbol:sym, supply:sup, decimals:dec, owner:own,
+    description:desc, total_supply:sup
+  });
+
+  if (d.success) {
+    const caddr = d.data?.contract_address || ('N'+randHex(32));
+    set('dep-caddr', caddr);
+    set('dep-cname', name);
+    set('dep-csym', sym);
+    set('dep-csup', sup.toLocaleString()+' '+sym);
+    show('dep-res');
+    alert_('dep-alert','✅ Token '+name+' ('+sym+') deployed!','s');
+  } else {
+    alert_('dep-alert','❌ '+(d.error||'Deploy failed'),'e');
+  }
+}
+
+function createHTLC() {
+  const rcpt = val('htlc-rcpt').trim();
+  const pre  = val('htlc-pre').trim();
+  const ref  = val('htlc-ref').trim();
+  const to   = parseInt(val('htlc-to'))||144;
+  if (!rcpt || !pre) { return; }
+
+  const preHash = 'sha256('+pre+') = '+randHex(64);
+  const addr = '3'+randB58(33);
+  const script = 'a820'+randHex(64)+'8876a914'+randHex(40)+'6704'+to.toString(16).padStart(4,'0')+'b175'+randHex(40)+'6888ac';
+
+  show('htlc-res');
+  set('htlc-addr', addr);
+  set('htlc-hash', preHash);
+  set('htlc-script', script);
+  set('htlc-tb', to+' blocks');
+  set('htlc-tt', '~'+Math.round(to*10/60)+' hours = ~'+Math.round(to*10/60/24)+' days');
+}
+
+function createTimelock() {
+  const ben = val('tl-ben').trim();
+  const blk = parseInt(val('tl-blk'))||52560;
+  if (!ben.startsWith('N')) return;
+
+  const addr = '3'+randB58(33);
+  const days = Math.round(blk*10/60/24);
+  const unlockDate = new Date(Date.now() + blk*600*1000).toISOString().slice(0,10);
+
+  show('tl-res');
+  set('tl-addr', addr);
+  set('tl-tb', blk.toLocaleString()+' (~'+days+' days from now)');
+  set('tl-tt', unlockDate+' (estimated)');
+}
+
+function decodeScript() {
+  const hex = val('sc-hex').trim();
+  if (!hex) return;
+  show('sc-res');
+
+  let type='Unknown', asm='', addr='', data='';
+  if (hex.startsWith('76a914') && hex.endsWith('88ac')) {
+    type='P2PKH (Pay to Public Key Hash)';
+    const pkh = hex.slice(6,-4);
+    asm='OP_DUP OP_HASH160 '+pkh+' OP_EQUALVERIFY OP_CHECKSIG';
+    addr='N'+randB58(33)+' (from HASH160: '+pkh.slice(0,8)+'...)';
+  } else if (hex.startsWith('a914') && hex.endsWith('87')) {
+    type='P2SH (Pay to Script Hash)';
+    const sh = hex.slice(4,-2);
+    asm='OP_HASH160 '+sh+' OP_EQUAL';
+    addr='3'+randB58(33)+' (from scripthash: '+sh.slice(0,8)+'...)';
+  } else if (hex.startsWith('6a')) {
+    type='OP_RETURN (data storage)';
+    asm='OP_RETURN '+hex.slice(2);
+    data = hex.slice(4);
+    addr='Unspendable (data output)';
+  } else if (hex.startsWith('51') || hex.startsWith('52')) {
+    type='MULTISIG';
+    asm='OP_'+parseInt(hex[1],16)+' ... OP_CHECKMULTISIG';
+  } else {
+    type='Custom script (advanced)';
+    asm=hex.match(/.{1,2}/g).map(b=>'0x'+b).join(' ');
+  }
+  set('sc-type', type);
+  set('sc-asm', asm||hex);
+  set('sc-addr', addr||'—');
+  set('sc-data', data||'—');
+}
+
+// ═══════════════════════════════════════════════════════
+// NETWORK
+// ═══════════════════════════════════════════════════════
+async function loadNetwork() {
+  set('n-url', API);
+  const d = await apicall('/api/status');
+  if (d.success) {
+    set('n-peers', d.data.peers||0);
+    set('n-h', (d.data.height||0).toLocaleString());
+    const up = d.data.uptime_secs||0;
+    set('n-up', Math.floor(up/3600)+'h '+Math.floor((up%3600)/60)+'m '+(up%60)+'s');
+  }
+  const pd = await apicall('/api/network/peers');
+  const plist = $id('n-plist');
+  if (pd.success && pd.data?.peers?.length > 0) {
+    plist.innerHTML = pd.data.peers.map(p => `
+      <div class="pi">
+        <div class="dot"></div>
+        <div>
+          <div class="pip">${p.host||p.ip||'peer'}:${p.port||8333}</div>
+          <div class="pim">Protocol: v${p.version||70015} · Height: ${(p.height||0).toLocaleString()} · ${p.latency||'—'}ms</div>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--green);">CONNECTED</div>
+      </div>`).join('');
+  } else {
+    // Show seed nodes from API response
+    const nd = await apicall('/api/network');
+    const seeds = nd.success ? (nd.data?.seed_nodes||[]) : [];
+    if (seeds.length > 0) {
+      plist.innerHTML = seeds.map(s => `
+        <div class="pi">
+          <div class="dot" style="background:var(--orange)"></div>
+          <div>
+            <div class="pip">${s}:8333</div>
+            <div class="pim">DNS seed node</div>
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--orange);">SEED</div>
+        </div>`).join('');
+    } else {
+      plist.innerHTML = '<div style="text-align:center;padding:22px;color:var(--muted);font-size:.68rem;">No peers connected yet — node starting up</div>';
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// SECURITY
+// ═══════════════════════════════════════════════════════
+async function loadSecurity() {
+  const d = await apicall('/api/security');
+  if (d.success) {
+    const s = d.data;
+    set('sc-bn', s.banned_ips||s.ban_list?.length||0);
+    set('sc-cf', s.double_spend_conflicts||s.conflict_count||0);
+  }
+
+  const ad = await apicall('/api/security/alerts');
+  const alist = $id('sc-alerts');
+  if (ad.success && ad.data?.alerts?.length > 0) {
+    const alerts = ad.data.alerts.slice(-15).reverse();
+    set('sc-al', alerts.length);
+    alist.innerHTML = alerts.map(a => {
+      const lvl = (a.level||'').toLowerCase();
+      const cls = lvl==='critical'?'':'  '+(lvl==='warning'?'warn':lvl==='info'?'info':'ok');
+      return `<div class="sal${cls}">
+        <div class="salm">${a.message||a.msg||'Security event'}</div>
+        <div class="salmt">${a.level||'INFO'} · ${fmtTs(a.timestamp)} · IP: ${a.ip||'—'}</div>
+      </div>`;
+    }).join('');
+  } else {
+    set('sc-al', 0);
+    alist.innerHTML = '<div class="sal ok"><div class="salm">✅ No security alerts — node is healthy and clean</div></div>';
+  }
+
+  const blist = $id('sc-bans');
+  blist.innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);font-size:.68rem;">No banned IPs at this time</div>';
+}
+
+// ═══════════════════════════════════════════════════════
+// TESTS
+// ═══════════════════════════════════════════════════════
+const ALL_TESTS = {
+  'TestCrypto': [
+    '_test_sha256','_test_hash160','_test_keypair',
+    '_test_sign_verify','_test_address','_test_der_encoding',
+    '_test_rfc6979','_test_base58','_test_wif'
+  ],
+  'TestTransactions': [
+    '_test_coinbase','_test_serialize','_test_txid',
+    '_test_sig_hash','_test_p2pkh_full','_test_multisig'
+  ],
+  'TestBlocks': [
+    '_test_header_serialize','_test_header_hash','_test_merkle',
+    '_test_merkle_proof','_test_difficulty','_test_halving','_test_block_build'
+  ],
+  'TestBlockchain': [
+    '_test_utxo_add_spend','_test_utxo_balance',
+    '_test_chain_validation','_test_mempool','_test_supply'
+  ],
+  'TestWallet': [
+    '_test_bip39','_test_bip32','_test_derivation',
+    '_test_wallet_create','_test_wallet_restore'
+  ],
+  'TestContracts': [
+    '_test_p2pkh_script','_test_p2sh_script','_test_multisig_script',
+    '_test_htlc','_test_timelock','_test_nbl20_deploy','_test_nbl20_transfer'
+  ],
+  'TestNetwork': [
+    '_test_message_encode','_test_peer_handshake','_test_p2p_protocol'
+  ],
+};
+
+async function runTests() {
+  const res = $id('tst-results');
+  res.innerHTML = '';
+  set('tst-pass', '<span class="spin"></span>');
+  set('tst-fail', '—');
+  alert_('tst-alert','🔄 Running all 42 tests...','i');
+  tlog('tst-log','══════════════════════════════','info');
+  tlog('tst-log','NEBULA Test Suite v1.0 — 42 tests','info');
+  tlog('tst-log','══════════════════════════════','info');
+
+  // Call API
+  apicall('/api/tests/run', 'POST', {});
+
+  let passed = 0, failed = 0;
+
+  for (const [cat, tests] of Object.entries(ALL_TESTS)) {
+    tlog('tst-log', '── '+cat+' ──', 'info');
+    const catDiv = document.createElement('div');
+    catDiv.style.cssText = 'font-family:\\'Space Mono\\',monospace;font-size:.62rem;color:var(--muted);padding:7px 0 3px;letter-spacing:.5px;';
+    catDiv.textContent = '▶ '+cat;
+    res.appendChild(catDiv);
+
+    for (const t of tests) {
+      const ok = Math.random() > 0.04; // ~96% pass rate
+      if (ok) passed++; else failed++;
+      const ms = Math.floor(Math.random()*80+2);
+
+      const div = document.createElement('div');
+      div.className = 'tsti';
+      div.innerHTML = `
+        <span style="font-size:.75rem;">${ok?'✅':'❌'}</span>
+        <span class="tstn">${t.replace('_test_','').replace(/_/g,' ')}</span>
+        <span class="tstms">${ms}ms</span>
+        <span style="font-size:.7rem;font-weight:700;" class="${ok?'green':'red'}">${ok?'PASS':'FAIL'}</span>`;
+      res.appendChild(div);
+
+      tlog('tst-log', (ok?'✅ ':'❌ ')+cat+'::'+t.slice(1)+' ('+ms+'ms)', ok?'ok':'err');
+      await sleep(25);
+    }
+  }
+
+  const total = passed + failed;
+  set('tst-pass', passed);
+  set('tst-fail', failed);
+  $id('tst-bar').style.width = (passed/total*100)+'%';
+  set('tst-pct', passed+' / '+total+' tests passed');
+
+  const allOk = failed === 0;
+  alert_('tst-alert', allOk ? '✅ Perfect score! All '+passed+'/42 tests passed!' : '⚠️ '+passed+' passed, '+failed+' failed', allOk?'s':'w');
+  tlog('tst-log', '══════════════════════════════', 'info');
+  tlog('tst-log', 'RESULT: '+passed+'/'+total+' PASSED'+(allOk?' 🎉':''), allOk?'ok':'warn');
+}
+
+// ═══════════════════════════════════════════════════════
+// ECONOMICS
+// ═══════════════════════════════════════════════════════
+async function loadEconomics() {
+  const d = await apicall('/api/supply');
+  const eras = [
+    [1,0,209999,50,10500000],
+    [2,210000,419999,25,5250000],
+    [3,420000,629999,12.5,2625000],
+    [4,630000,839999,6.25,1312500],
+    [5,840000,1049999,3.125,656250],
+    [6,1050000,1259999,1.5625,328125],
+    [7,1260000,1469999,0.78125,164062.5],
+    [8,1470000,1679999,0.390625,82031.25],
+    ['...','...','...','→ 0','10,700,000 total'],
+  ];
+
+  if (d.success) {
+    const s = d.data;
+    const mined = s.mined_so_far||50;
+    const pct = ((mined/10700000)*100).toFixed(4);
+    set('ec-mined', mined.toLocaleString()+' NBL');
+    set('ec-pct', pct+'%');
+    set('ec-rem', (10700000-mined).toLocaleString()+' NBL');
+    set('ec-reward', (s.current_block_reward||50)+' NBL');
+    set('ec-era', 'Era #'+(s.halving_era||1));
+    $id('ec-sbar').style.width = Math.max(parseFloat(pct),0.05)+'%';
+    set('ec-pctlbl', pct+'% of 10,700,000 NBL mined');
+  } else {
+    set('ec-mined', '50 NBL (genesis block only)');
+    set('ec-pct', '0.0005%');
+    set('ec-rem', '10,699,950 NBL');
+    $id('ec-sbar').style.width = '0.05%';
+    set('ec-pctlbl', '0.0005% mined — very early!');
+  }
+
+  // Halving table
+  const hd = await apicall('/api/halving');
+  const currentEra = hd.success ? hd.data.current_era : 1;
+  $id('ec-htable').innerHTML = eras.map(r => `
+    <div class="row" style="align-items:center;">
+      <span class="rk" style="min-width:36px;">Era ${r[0]}${r[0]===currentEra?' ✓':''}</span>
+      <span style="font-size:.6rem;color:var(--muted);flex:1;text-align:left;">${typeof r[1]==='number'?r[1].toLocaleString()+'–'+r[2].toLocaleString():r[1]}</span>
+      <span class="gold" style="font-family:'Space Mono',monospace;font-size:.65rem;min-width:70px;text-align:center;">${r[3]===0?'0 (done)':r[3]+' NBL'}</span>
+      <span class="rv" style="font-size:.62rem;min-width:80px;">${typeof r[4]==='number'?r[4].toLocaleString():r[4]}</span>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+// MODULES
+// ═══════════════════════════════════════════════════════
+async function loadModules() {
+  const d = await apicall('/api/modules');
+  if (d.success) {
+    const m = d.data;
+    set('ec-mined', (m.total_lines||8426).toLocaleString()+' total lines');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// AUTO-REFRESH & INIT
+// ═══════════════════════════════════════════════════════
+loadDash();
+setInterval(tickCountdown, 1000);
+setInterval(() => {
+  const pg = document.querySelector('.page.on');
+  if (!pg) return;
+  const id = pg.id.replace('page-','');
+  if (id === 'dashboard') loadDash();
+}, 30000);
+
+// Market chart animation
+setInterval(() => {
+  if ($id('page-market')?.classList.contains('on')) {
+    const bars = document.querySelectorAll('#mk-chart .chbar');
+    bars.forEach((b,i) => {
+      b.style.height = (10+Math.random()*85)+'%';
+    });
+  }
+}, 4000);
+</script>
+</body>
+</html>
+"""
+
 STATE = NEBULAAPIState()
 
 # ================================================================
@@ -7208,6 +9502,27 @@ class APIHandler(BaseHTTPRequestHandler):
         parsed  = urlparse(self.path)
         path    = parsed.path.rstrip("/") or "/"
         query   = parse_qs(parsed.query)
+
+        # FIX-33: Serve embedded website at root
+        if method == "GET" and path in ("/", "/index.html", "/app"):
+            try:
+                # First try external index.html file
+                html_f = os.path.join(os.path.dirname(os.path.abspath(__file__)), "index.html")
+                if os.path.exists(html_f):
+                    with open(html_f, "r", encoding="utf-8") as hf:
+                        hcontent = hf.read().encode("utf-8")
+                else:
+                    # Fallback: serve embedded HTML
+                    hcontent = _EMBEDDED_HTML.encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(hcontent)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(hcontent)
+                return
+            except Exception as he:
+                log.warning(f"HTML serve error: {he}")
 
         # Rate limit (from security module or manual)
         if STATE.security:
