@@ -23,8 +23,7 @@ NEBULA (NBL) is a **complete, independent blockchain** built entirely from scrat
 
 > *"No Government. No Bank. No Permission. — 2025"*
 
-Built by **Rahmatullah Rahmani** — a self-taught developer from Afghanistan, coded entirely on a mobile phone. 📱
-
+Built by **Rahmatullah Rahmani** — an independent developer from Afghanistan dedicated to financial freedom for all humanity.
 ---
 
 ## ✨ Features
